@@ -3,6 +3,7 @@ package main
 import "fmt"
 import "os"
 import "github.com/alaingilbert/ogame"
+import "github.com/golang-collections/go-datastructures/queue"
 
 func main() {
 	universe := os.Getenv("UNIVERSE") // eg: Bellatrix
