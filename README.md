@@ -6,7 +6,7 @@ GOlang으로 작성한 오게임 봇 입니다.
 
 
 ##설치 혹은 실행
-```go get``` (맥의 경우  gobin 설정이 필요할수 있음 https://stackoverflow.com/a/32357023)
+```go get -u all``` (맥의 경우  gobin 설정이 필요할수 있음 https://stackoverflow.com/a/32357023)
 
 
 ##우선구현기능
