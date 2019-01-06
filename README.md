@@ -1,6 +1,10 @@
 # Ogame GO bot wrapper
 GOlang으로 작성한 오게임 봇 입니다.
 
+##개발환경설정
+- 클론 받은 ogameGo_Bot 디렉토리를 GOPATH 로 설정합니다.
+
+
 ##설치 혹은 실행
 ```go get``` (맥의 경우  gobin 설정이 필요할수 있음 https://stackoverflow.com/a/32357023)
 
