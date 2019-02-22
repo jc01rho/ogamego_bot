@@ -5,6 +5,7 @@ import (
 	"github.com/alaingilbert/ogame"
 	"github.com/marcsantiago/gocron"
 	"ogame-golang-bot/Telegram"
+	"os"
 )
 
 func taskWithParams(a int, b string) {
