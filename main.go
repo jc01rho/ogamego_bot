@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/alaingilbert/ogame"
-	"github.com/marcsantiago/gocron"
+	"github.com/jc01rho/gocron"
 	"ogame-golang-bot/Telegram"
 	"os"
 )
