@@ -40,6 +40,9 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	attacked := bot.IsUnderAttack()
+	attacked, err := bot.IsUnderAttack()
+	if err != nil {
+		panic(err)
+	}
 	fmt.Println(attacked) // False
 }
