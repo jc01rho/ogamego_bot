@@ -1,10 +1,14 @@
 package main
 
 import (
-	"fmt"
 	"bitbucket.org/jc01rho/ogame"
-	"github.com/jc01rho/gocron"
-	"ogame-golang-bot/Telegram"
+	"fmt"
+	"github.com/jc01rho/ogamego_bot/Telegram"
+	"github.com/urfave/cli/v2"
+	"github.com/utahta/go-cronowriter"
+	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
+	"log"
 	"os"
 )
 
@@ -17,6 +21,40 @@ func taskWithParams(a int, b string) {
 var telegramBotToken = "TOKEN"
 
 func main() {
+
+	w1 := cronowriter.MustNew("/tmp/example.log.%Y%m%d")
+	w2 := cronowriter.MustNew("/tmp/internal_error.log.%Y%m%d")
+
+	atom := zap.NewAtomicLevel()
+
+	encoderCfg := zap.NewProductionEncoderConfig()
+	encoderCfg.TimeKey = "timestamp"
+	encoderCfg.EncodeTime = zapcore.ISO8601TimeEncoder
+
+
+	l := zap.New(
+
+		zapcore.NewCore(
+			zapcore.NewJSONEncoder(encoderCfg),
+			zapcore.Lock(os.Stdout),
+			atom,),
+		zap.ErrorOutput()
+	)
+	l.Info("test")
+
+	app := &cli.App{
+		Action: func(c *cli.Context) error {
+			fmt.Printf("Hello %q", c.Args().Get(0))
+			return nil
+		},
+	}
+
+	err := app.Run(os.Args)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+
 
 	//gocron.Every(1).Second().Do(taskWithParams, 1, "hello")
 	//gocron.Every(2).Second().Do(taskWithParams, 2, "hello")
