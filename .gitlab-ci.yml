@@ -21,13 +21,14 @@ before_script:
   - mkdir -p $GOPATH/src/$REPO/$GROUP $GOPATH/src/_/builds
   - cp -r $CUSTOM_PROJECT_DIR $GOPATH/src/$REPO/$GROUP/$PROJECT
   - ln -s $GOPATH/src/$REPO/$GROUP $GOPATH/src/_/builds/$GROUP
-  - go get -v -d ./...
+
 
 
 
 build-ogamego_bot:
   stage: build
   script:
+    - go get -v -d ./...
     - >
       for GOOSV in darwin linux; do
         for GOARCHV in 386 amd64; do
