@@ -24,7 +24,13 @@ before_script:
 build-ogamego_bot:
   stage: build
   script:
-    - go build -o $CUSTOM_PROJECT_DIR/${ARTIFACTS_DIR}/${BIN_NAME}
+    - >
+      for GOOS in darwin linux windows; do
+        for GOARCH in 386 amd64; do
+          go build -v -o $CUSTOM_PROJECT_DIR/${ARTIFACTS_DIR}/ogame-bot-$GOOS-$GOARCH
+        done
+      done
+
   artifacts:
     paths:
       - ${ARTIFACTS_DIR}
