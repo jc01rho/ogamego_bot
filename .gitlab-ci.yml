@@ -27,7 +27,7 @@ build-ogamego_bot:
     - >
       for GOOSV in darwin linux windows; do
         for GOARCHV in 386 amd64; do
-          env GOOS=$GOOSV GOARCH=$GOARCHV go build -v -o $CUSTOM_PROJECT_DIR/${ARTIFACTS_DIR}/ogame-bot-$GOOS-$GOARCH
+          env GOOS=$GOOSV GOARCH=$GOARCHV go build -v -o $CUSTOM_PROJECT_DIR/${ARTIFACTS_DIR}/ogame-bot-$GOOSV-$GOARCHV
         done
       done
 
