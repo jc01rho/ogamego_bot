@@ -31,7 +31,6 @@ test-ogamego_bot:
   script:
     - dep ensure
     - go test -v -cover ./...
-    -
 
 code_quality:
   stage: test
