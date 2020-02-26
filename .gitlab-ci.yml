@@ -7,6 +7,7 @@ variables:
   PROJECT: ogamego_bot
   ARTIFACTS_DIR: artifacts
   BIN_NAME: ogamego_bot
+  CUSTOM_PROJECT_DIR: /builds/ogame_golang_bot/ogamego_bot
 
 stages:
   - build
@@ -14,7 +15,7 @@ stages:
 
 before_script:
   - mkdir -p $GOPATH/src/$REPO/$GROUP $GOPATH/src/_/builds
-  - cp -r $CI_PROJECT_DIR $GOPATH/src/$REPO/$GROUP/$PROJECT
+  - cp -r $CUSTOM_PROJECT_DIR $GOPATH/src/$REPO/$GROUP/$PROJECT
   - ln -s $GOPATH/src/$REPO/$GROUP $GOPATH/src/_/builds/$GROUP
   - go get -v -d ./...
 
@@ -23,7 +24,7 @@ before_script:
 build-ogamego_bot:
   stage: build
   script:
-    - go build -o ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}/${BIN_NAME}
+    - go build -o $CUSTOM_PROJECT_DIR/${ARTIFACTS_DIR}/${BIN_NAME}
   artifacts:
     paths:
       - ${ARTIFACTS_DIR}
