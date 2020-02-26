@@ -1,0 +1,53 @@
+# Replace "projectname" and "username"
+image: golang:1.13
+
+variables:
+  BIN_NAME: ogamego_bot
+  ARTIFACTS_DIR: artifacts
+  GO_PROJECT: github.com/jc01rho/ogamego_bot
+
+stages:
+  - build
+  - test
+
+before_script:
+  - mkdir -p ${GOPATH}/src/${GO_PROJECT}
+  - mkdir -p ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}
+  - go get -u github.com/golang/dep/cmd/dep
+  - cp -r ${CI_PROJECT_DIR}/* ${GOPATH}/src/${GO_PROJECT}/
+  - cd ${GOPATH}/src/${GO_PROJECT}
+
+build-ogamego_bot:
+  stage: build
+  script:
+    - dep ensure
+    - go build -o ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}/${BIN_NAME}
+  artifacts:
+    paths:
+      - ${ARTIFACTS_DIR}
+
+test-ogamego_bot:
+  stage: test
+  script:
+    - dep ensure
+    - go test -v -cover ./...
+    -
+
+code_quality:
+  stage: test
+  image: docker:stable
+  variables:
+    DOCKER_DRIVER: overlay2
+  allow_failure: true
+  services:
+    - docker:stable-dind
+  script:
+    - export SP_VERSION=$(echo "$CI_SERVER_VERSION" | sed 's/^\([0-9]*\)\.\([0-9]*\).*/\1-\2-stable/')
+    - docker run
+      --env SOURCE_CODE="$PWD"
+      --volume "$PWD":/code
+      --volume /var/run/docker.sock:/var/run/docker.sock
+      "registry.gitlab.com/gitlab-org/security-products/codequality:$SP_VERSION" /code
+  artifacts:
+    reports:
+      codequality: gl-code-quality-report.json
