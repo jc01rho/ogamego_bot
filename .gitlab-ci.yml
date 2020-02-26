@@ -35,10 +35,6 @@ build-ogamego_bot:
     paths:
       - ${ARTIFACTS_DIR}
 
-test-ogamego_bot:
-  stage: test
-  script:
-    - go test -v -cover ./...
 
 code_quality:
   stage: test
@@ -58,3 +54,10 @@ code_quality:
   artifacts:
     reports:
       codequality: gl-code-quality-report.json
+
+
+
+test-ogamego_bot:
+  stage: test
+  script:
+    - go test -v -cover ./...
