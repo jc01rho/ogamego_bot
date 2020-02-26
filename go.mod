@@ -4,6 +4,7 @@ require (
 	bitbucket.org/jc01rho/ogame v0.0.0-20200213170144-376b27aa943e
 	github.com/DataDog/zstd v1.4.4 // indirect
 	github.com/OneOfOne/xxhash v1.2.7 // indirect
+
 	github.com/avast/retry-go v2.4.3+incompatible // indirect
 	github.com/campoy/gomodtest v2.0.0+incompatible // indirect
 
