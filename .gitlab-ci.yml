@@ -25,9 +25,9 @@ build-ogamego_bot:
   stage: build
   script:
     - >
-      for GOOS in darwin linux windows; do
-        for GOARCH in 386 amd64; do
-          go build -v -o $CUSTOM_PROJECT_DIR/${ARTIFACTS_DIR}/ogame-bot-$GOOS-$GOARCH
+      for GOOSV in darwin linux windows; do
+        for GOARCHV in 386 amd64; do
+          env GOOS=$GOOSV GOARCH=$GOARCHV go build -v -o $CUSTOM_PROJECT_DIR/${ARTIFACTS_DIR}/ogame-bot-$GOOS-$GOARCH
         done
       done
 
