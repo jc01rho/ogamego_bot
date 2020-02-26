@@ -1,25 +1,28 @@
 # Replace "projectname" and "username"
-image: golang:1.13
+image: golang:1.14
 
 variables:
-  BIN_NAME: ogamego_bot
+  REPO: github.com
+  GROUP: jc01rho
+  PROJECT: ogamego_bot
   ARTIFACTS_DIR: artifacts
-  GO_PROJECT: github.com/jc01rho/ogamego_bot
+  BIN_NAME: ogamego_bot
 
 stages:
   - build
   - test
 
 before_script:
-  - mkdir -p ${GOPATH}/src/${GO_PROJECT}
-  - mkdir -p ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}
-  - cp -r ${CI_PROJECT_DIR}/* ${GOPATH}/src/${GO_PROJECT}/
-  - cd ${GOPATH}/src/${GO_PROJECT}
+  - mkdir -p $GOPATH/src/$REPO/$GROUP $GOPATH/src/_/builds
+  - cp -r $CI_PROJECT_DIR $GOPATH/src/$REPO/$GROUP/$PROJECT
+  - ln -s $GOPATH/src/$REPO/$GROUP $GOPATH/src/_/builds/$GROUP
+  - go get -v -d ./...
+
+
 
 build-ogamego_bot:
   stage: build
   script:
-    - dep ensure
     - go build -o ${CI_PROJECT_DIR}/${ARTIFACTS_DIR}/${BIN_NAME}
   artifacts:
     paths:
@@ -28,7 +31,6 @@ build-ogamego_bot:
 test-ogamego_bot:
   stage: test
   script:
-    - dep ensure
     - go test -v -cover ./...
 
 code_quality:
