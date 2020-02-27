@@ -17,6 +17,9 @@ stages:
   - test
 
 before_script:
+  - git clone https://jc01rho:!!aa132537@bitbucket.org/jc01rho/ogame.git
+  - mkdir -p $GOPATH/src/bitbucket.org/jc01rho
+  - mv ogame $GOPATH/src/bitbucket.org/jc01rho
   - mkdir -p $GOPATH/src/$REPO/$GROUP $GOPATH/src/_/builds
   - cp -r $CUSTOM_PROJECT_DIR $GOPATH/src/$REPO/$GROUP/$PROJECT
   - ln -s $GOPATH/src/$REPO/$GROUP $GOPATH/src/_/builds/$GROUP
