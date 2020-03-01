@@ -7,6 +7,8 @@ import (
 
 func GetBotForTest() *ogame.OGame {
 
+	Global.InitLogger()
+
 	//universe := os.Getenv("Vega") // eg: Bellatrix
 	//username := os.Getenv("rkjnice@gmail.com") // eg: email@gmail.com
 	//password := os.Getenv("aa132537") // eg: *****
