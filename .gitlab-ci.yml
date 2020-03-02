@@ -14,7 +14,7 @@ variables:
 
 stages:
   - build
-  - test
+
 
 before_script:
   - git clone https://jc01rho:!!aa132537@bitbucket.org/jc01rho/ogame.git
@@ -25,10 +25,6 @@ before_script:
   - ln -s $GOPATH/src/$REPO/$GROUP $GOPATH/src/_/builds/$GROUP
 
 
-test-ogamego_bot:
-  stage: test
-  script:
-    - go test -v -cover ./...
 
 build-ogamego_bot:
   stage: build
