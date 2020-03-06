@@ -2,11 +2,13 @@ package OGameBot
 
 import "bitbucket.org/jc01rho/ogame"
 
-type OGameBot struct {
-	ogamebot *ogame.OGame
+var OGameBotGlobal OGameBot
 
-	universe string
-	username string
-	password string
-	language string
+type OGameBot struct {
+	Ogamebot *ogame.OGame
+
+	Universe string
+	Username string
+	Password string
+	Language string
 }

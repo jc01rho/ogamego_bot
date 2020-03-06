@@ -1,13 +1,21 @@
 package Global
 
 import (
-	"github.com/jc01rho/ogamego_bot/Bot"
+	"github.com/jc01rho/ogamego_bot/OGameBot"
 	"github.com/jc01rho/ogamego_bot/Queue"
+	"github.com/jc01rho/ogamego_bot/Scheduler"
+	"github.com/jc01rho/ogamego_bot/Test"
 )
 
 func InitEssentials() {
 
+	OGameBot.OGameBotGlobal.Ogamebot = Test.GetBotForTest()
+
 	Queue.InitQueue()
-	Bot.InitBot()
+	//Bot.InitBot()
+
+	Queue.InitQueue()
+	Scheduler.InitScheduler()
+	Scheduler.DefaultJobs()
 
 }

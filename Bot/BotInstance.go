@@ -2,10 +2,9 @@ package Bot
 
 import (
 	"bitbucket.org/jc01rho/ogame"
+	"github.com/jc01rho/ogamego_bot/OGameBot"
 	"os"
 )
-
-var BotInstance *ogame.OGame
 
 func InitBot() {
 	universe := os.Getenv("UNIVERSE") // eg: Bellatrix
@@ -13,5 +12,5 @@ func InitBot() {
 	password := os.Getenv("PASSWORD") // eg: *****
 	language := os.Getenv("LANGUAGE") // eg: en
 	bot, _ := ogame.New(universe, username, password, language)
-	BotInstance = bot
+	OGameBot.OGameBotGlobal.Ogamebot = bot
 }

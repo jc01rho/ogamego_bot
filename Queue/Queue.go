@@ -2,6 +2,7 @@ package Queue
 
 import (
 	"fmt"
+	"github.com/jc01rho/ogamego_bot/Logger"
 	"reflect"
 	"sync"
 )
@@ -23,6 +24,7 @@ func (q *Queue) Set(value interface{}, params ...interface{}) {
 	//defer q.C.Signal() // will wake up a popper
 	//q.C.L.Lock()
 	//defer q.C.L.Unlock()
+	Logger.Logger.Info("Set")
 	job := Jobs{
 
 		Funcs:   value,
@@ -34,6 +36,7 @@ func (q *Queue) Set(value interface{}, params ...interface{}) {
 
 // 값을 꺼내기
 func (q *Queue) Get() Jobs {
+	Logger.Logger.Info("Get")
 	return <-q.Items
 }
 
@@ -49,13 +52,14 @@ func (q *Queue) DirectRun() {
 	item = <-q.Items
 
 	f := reflect.ValueOf(item.Funcs)
-	if len(item.Fparams) != f.Type().NumIn() {
+	if len(item.Fparams) != f.Type().NumIn() && !reflect.TypeOf(item.Funcs).IsVariadic() {
 		//return nil, errors.New("the number of params is not matched")
 	}
 	in := make([]reflect.Value, len(item.Fparams))
 	for k, param := range item.Fparams {
 		in[k] = reflect.ValueOf(param)
 	}
+
 	f.Call(in)
 
 }
