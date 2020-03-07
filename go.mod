@@ -19,6 +19,6 @@ require (
 
 )
 
-replace bitbucket.org/jc01rho/ogame => ../../../bitbucket.org/jc01rho/ogame
+replace bitbucket.org/jc01rho/ogame => $GOPATH/bitbucket.org/jc01rho/ogame
 
 go 1.14

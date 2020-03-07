@@ -29,6 +29,7 @@ before_script:
 build-ogamego_bot:
   stage: build
   script:
+    - cd $GOPATH/src/$REPO/$GROUP/$PROJECT
     - go get -v -d ./...
     - >
       for GOOSV in darwin linux; do
