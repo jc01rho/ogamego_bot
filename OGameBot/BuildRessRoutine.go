@@ -11,7 +11,8 @@ func (bot *OGameBot) BuildNextRess() {
 	targetPlaent, targetBuilding, level := OgameUtil.GetNextResBuilding(bot.Ogamebot)
 	CurrentRessInTargetPlanet, _ := bot.Ogamebot.GetResources(targetPlaent.ID.Celestial())
 	NeedsRess := targetBuilding.GetPrice(level + 1)
-	if CurrentRessInTargetPlanet.Sub(NeedsRess).Metal == 0 || CurrentRessInTargetPlanet.Sub(NeedsRess).Crystal == 0 || CurrentRessInTargetPlanet.Sub(NeedsRess).Deuterium == 0 {
+	CurrentRess := CurrentRessInTargetPlanet.SubReal(NeedsRess)
+	if CurrentRess.Metal <0 || CurrentRess.Crystal < 0 || CurrentRess.Deuterium  < 0 {
 		//자원 부족시 모아서 처리하는 기능 구현 필요
 		//달 위주 운영 하자...
 

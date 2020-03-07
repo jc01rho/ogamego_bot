@@ -4,7 +4,6 @@ require (
 	bitbucket.org/jc01rho/ogame v0.0.0-20200213170144-376b27aa943e
 	github.com/jc01rho/gocron v1.0.3
 	github.com/kr/pretty v0.2.0 // indirect
-	github.com/labstack/gommon v0.3.0
 	github.com/mattn/go-colorable v0.1.6 // indirect
 	github.com/mattn/go-runewidth v0.0.8 // indirect
 	go.uber.org/multierr v1.5.0 // indirect
@@ -20,5 +19,7 @@ require (
 	honnef.co/go/tools v0.0.1-2020.1.3 // indirect
 
 )
+
+replace bitbucket.org/jc01rho/ogame => ../../../bitbucket.org/jc01rho/ogame
 
 go 1.14
