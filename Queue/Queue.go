@@ -7,6 +7,7 @@ import (
 	"sync"
 )
 
+//TODO : change to priority queue
 // 정수현 chan으로 Queue정의
 type Jobs struct {
 	Funcs   interface{}   // Map for the function task store
@@ -24,7 +25,7 @@ func (q *Queue) Set(value interface{}, params ...interface{}) {
 	//defer q.C.Signal() // will wake up a popper
 	//q.C.L.Lock()
 	//defer q.C.L.Unlock()
-	Logger.Logger.Info("Set")
+	Logger.Logger.Sugar().Info("Queue Set")
 	job := Jobs{
 
 		Funcs:   value,

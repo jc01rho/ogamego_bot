@@ -7,6 +7,8 @@ var OGameBotGlobal OGameBot
 type OGameBot struct {
 	Ogamebot *ogame.OGame
 
+	Class ogame.CharacterClass
+
 	Universe string
 	Username string
 	Password string

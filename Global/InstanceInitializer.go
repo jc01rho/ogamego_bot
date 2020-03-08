@@ -10,6 +10,7 @@ import (
 func InitEssentials() {
 
 	OGameBot.OGameBotGlobal.Ogamebot = Test.GetBotForTest()
+	OGameBot.OGameBotGlobal.Class = OGameBot.OGameBotGlobal.Ogamebot.CharacterClass()
 
 	Queue.InitQueue()
 	//Bot.InitBot()
