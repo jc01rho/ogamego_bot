@@ -16,7 +16,6 @@ require (
 	gopkg.in/tucnak/telebot.v2 v2.0.0-20191225234705-baa616bc00d5
 	gopkg.in/yaml.v2 v2.2.7 // indirect
 	honnef.co/go/tools v0.0.1-2020.1.3 // indirect
-
 )
 
 replace bitbucket.org/jc01rho/ogame => ../../../bitbucket.org/jc01rho/ogame

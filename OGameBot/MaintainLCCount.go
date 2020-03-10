@@ -29,8 +29,9 @@ func (bot *OGameBot) MaintainLCCountStep(LCcount int64) {
 			Logger.Logger.Sugar().Infof("%v Build LC %v", elm.Coordinate, ToBuildLCCount)
 
 			//Logger.Logger.Debug("BuildLC",zap.Object)
-			elm.BuildShips(ogame.LargeCargo.ID, int64(ToBuildLCCount)) //TODO: check build failed
+			elm.BuildShips(ogame.LargeCargo.ID, int64(ToBuildLCCount))
 		}
 	}
+	Logger.Logger.Sugar().Infof("MaintainLCCountStep done")
 
 }

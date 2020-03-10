@@ -1,16 +1,19 @@
 package Global
 
 import (
+	"bitbucket.org/jc01rho/ogame"
 	"github.com/jc01rho/ogamego_bot/OGameBot"
 	"github.com/jc01rho/ogamego_bot/Queue"
 	"github.com/jc01rho/ogamego_bot/Scheduler"
-	"github.com/jc01rho/ogamego_bot/Test"
 )
 
-func InitEssentials() {
+func InitEssentials(bot *ogame.OGame) {
 
-	OGameBot.OGameBotGlobal.Ogamebot = Test.GetBotForTest()
+	//OGameBot.OGameBotGlobal.Ogamebot = Test.GetBotForTest()
+	//OGameBot.OGameBotGlobal.Class = OGameBot.OGameBotGlobal.Ogamebot.CharacterClass()
+	OGameBot.OGameBotGlobal.Ogamebot = bot
 	OGameBot.OGameBotGlobal.Class = OGameBot.OGameBotGlobal.Ogamebot.CharacterClass()
+	OGameBot.OGameBotGlobal.DetermineMainPlanet()
 
 	Queue.InitQueue()
 	//Bot.InitBot()
