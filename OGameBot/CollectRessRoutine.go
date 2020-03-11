@@ -1,5 +1,5 @@
 package OGameBot
 
-func CollectRessRoutine() {
+func (bot *OGameBot) CollectRessRoutine() {
 
 }
