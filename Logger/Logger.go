@@ -5,7 +5,6 @@ import (
 	"gopkg.in/natefinch/lumberjack.v2"
 	"io"
 	"os"
-	"path/filepath"
 	"runtime"
 )
 
@@ -24,11 +23,12 @@ func InitLogger() {
 	var logMultiWriter io.Writer
 	if IsDevelopment {
 		log.SetFormatter(&log.TextFormatter{TimestampFormat: "2006-01-02 15:04:05", ForceColors: true})
+		log.SetLevel(log.TraceLevel)
 
 		logMultiWriter = io.MultiWriter(os.Stdout)
 	} else {
-		log.SetFormatter(&log.TextFormatter{TimestampFormat: "2006-01-02 15:04:05", ForceColors: true})
-
+		log.SetFormatter(&log.TextFormatter{TimestampFormat: "2006-01-02 15:04:05"})
+		log.SetLevel(log.DebugLevel)
 		logMultiWriter = io.MultiWriter(os.Stdout, lumberjackLogrotate)
 	}
 
@@ -42,7 +42,11 @@ func InitLogger() {
 
 }
 
-func LogFileData() (string, int) {
-	_, f, l, _ := runtime.Caller(2)
-	return filepath.Base(f), l
+func CurrentFileNameAndLine() []interface{} {
+	//value interface{}
+	_, b, c, _ := runtime.Caller(1)
+	arrays := []interface{}{}
+	arrays = append(arrays, b)
+	arrays = append(arrays, c)
+	return arrays
 }

@@ -3,6 +3,7 @@ package Queue
 import (
 	"fmt"
 	log "github.com/sirupsen/logrus"
+
 	"path/filepath"
 	"reflect"
 	"runtime"
@@ -10,14 +11,15 @@ import (
 )
 
 //TODO : change to priority queue
-// 정수현 chan으로 Queue정의
+
 type Jobs struct {
 	Funcs   interface{}   // Map for the function task store
 	Fparams []interface{} // Map for function and  params of function
 }
 type Queue struct {
-	Items chan Jobs
-	C     *sync.Cond
+	Items   chan Jobs
+	Counter int
+	C       *sync.Cond
 }
 
 var JobQueue *Queue = nil
@@ -28,21 +30,24 @@ func (q *Queue) Set(value interface{}, params ...interface{}) {
 	//q.C.L.Lock()
 	//defer q.C.L.Unlock()
 
-	_, f, l, _ := runtime.Caller(1)
-
-	log.Info("Queue Added [", filepath.Base(f), ":", l, "] ", runtime.FuncForPC(reflect.ValueOf(value).Pointer()).Name())
+	fucntionpointer := runtime.FuncForPC(reflect.ValueOf(value).Pointer())
+	f, l := fucntionpointer.FileLine(fucntionpointer.Entry())
+	log.Debug("Trying Queue add [", filepath.Base(f), ":", l, "] ", fucntionpointer.Name())
 	job := Jobs{
 
 		Funcs:   value,
 		Fparams: params,
 	}
 	q.Items <- job
+	q.Counter++
+	log.Trace("Add Complete. Current Queue Size is ", q.Counter)
 
 }
 
 // 값을 꺼내기
 func (q *Queue) Get() Jobs {
 	log.Info("Get")
+	q.Counter--
 	return <-q.Items
 }
 
@@ -55,6 +60,7 @@ func (q *Queue) DirectRun() {
 	//}
 
 	var item Jobs
+	q.Counter--
 	item = <-q.Items
 
 	f := reflect.ValueOf(item.Funcs)
@@ -66,7 +72,11 @@ func (q *Queue) DirectRun() {
 		in[k] = reflect.ValueOf(param)
 	}
 
-	log.Info("Queue Task Running")
+	fucntionpointer := runtime.FuncForPC(f.Pointer())
+
+	fc, l := fucntionpointer.FileLine(fucntionpointer.Entry())
+
+	log.Info("Queue Task Calling [", filepath.Base(fc), ":", l, "] ", runtime.FuncForPC(f.Pointer()).Name())
 
 	f.Call(in)
 
@@ -80,6 +90,7 @@ func InitQueue() {
 	newQ := new(Queue)
 	newQ.C = sync.NewCond(new(sync.Mutex))
 	newQ.Items = make(chan Jobs, 100)
+	newQ.Counter = 0
 
 	JobQueue = newQ
 }

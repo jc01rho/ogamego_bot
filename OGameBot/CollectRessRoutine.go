@@ -16,7 +16,7 @@ func (bot *OGameBot) CollectRessRoutine() {
 			currentCap := OgameUtil.GetCapacityOfCurrentBotOfPlanetWithOnlyLC(bot.Ogamebot, elm.ID)
 
 			if currentRess.Total() >= currentCap {
-				bot.SendRessRoutine(&elm, currentRess, bot.MainPlanetCoord)
+				bot.SendRessRoutineFromCelestitial(elm.ID.Celestial(), currentRess, bot.MainPlanetCoord)
 			}
 
 		}

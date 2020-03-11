@@ -18,7 +18,7 @@ func InitEssentials(bot *ogame.OGame) {
 	Queue.InitQueue()
 	//Bot.InitBot()
 
-	Queue.InitQueue()
+	//Queue.InitQueue()
 	Scheduler.InitScheduler()
 	Scheduler.DefaultJobs()
 
