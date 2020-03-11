@@ -1,0 +1,5 @@
+package OGameBot
+
+func CollectRessRoutine() {
+
+}

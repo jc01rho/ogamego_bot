@@ -11,6 +11,7 @@ func (bot *OGameBot) BuildNextRess() {
 	targetPlaent, targetBuilding, level := OgameUtil.GetNextResBuilding(bot.Ogamebot)
 	CurrentRessInTargetPlanet, _ := bot.Ogamebot.GetResources(targetPlaent.ID.Celestial())
 	NeedsRess := targetBuilding.GetPrice(level + 1)
+	bot.Ogamebot.Abandon()
 
 	if CurrentRessInTargetPlanet.CanAfford(NeedsRess) {
 		//자원 부족시 모아서 처리하는 기능 구현 필요
