@@ -2,13 +2,13 @@ package OGameBot
 
 import (
 	"bitbucket.org/jc01rho/ogame"
-	"github.com/jc01rho/ogamego_bot/Logger"
 	"github.com/jc01rho/ogamego_bot/OgameUtil"
+	log "github.com/sirupsen/logrus"
 	"math"
 )
 
 func (bot *OGameBot) MaintainLCCountStep(LCcount int64) {
-	Logger.Logger.Sugar().Infof("MaintainLCCountStep start")
+	log.Info("MaintainLCCountStep start")
 
 	planets := bot.Ogamebot.GetCachedPlanets()
 
@@ -26,12 +26,12 @@ func (bot *OGameBot) MaintainLCCountStep(LCcount int64) {
 				ToBuildLCCount = (LCcount)
 			}
 
-			Logger.Logger.Sugar().Infof("%v Build LC %v", elm.Coordinate, ToBuildLCCount)
+			log.Info("%v Build LC %v", elm.Coordinate, ToBuildLCCount)
 
 			//Logger.Logger.Debug("BuildLC",zap.Object)
 			elm.BuildShips(ogame.LargeCargo.ID, int64(ToBuildLCCount))
 		}
 	}
-	Logger.Logger.Sugar().Infof("MaintainLCCountStep done")
+	log.Info("MaintainLCCountStep done")
 
 }

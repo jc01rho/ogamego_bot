@@ -2,8 +2,10 @@ package Queue
 
 import (
 	"fmt"
-	"github.com/jc01rho/ogamego_bot/Logger"
+	log "github.com/sirupsen/logrus"
+	"path/filepath"
 	"reflect"
+	"runtime"
 	"sync"
 )
 
@@ -25,7 +27,10 @@ func (q *Queue) Set(value interface{}, params ...interface{}) {
 	//defer q.C.Signal() // will wake up a popper
 	//q.C.L.Lock()
 	//defer q.C.L.Unlock()
-	Logger.Logger.Sugar().Info("Queue Set")
+
+	_, f, l, _ := runtime.Caller(1)
+
+	log.Info("Queue Added [", filepath.Base(f), ":", l, "] ", runtime.FuncForPC(reflect.ValueOf(value).Pointer()).Name())
 	job := Jobs{
 
 		Funcs:   value,
@@ -37,7 +42,7 @@ func (q *Queue) Set(value interface{}, params ...interface{}) {
 
 // 값을 꺼내기
 func (q *Queue) Get() Jobs {
-	Logger.Logger.Info("Get")
+	log.Info("Get")
 	return <-q.Items
 }
 
@@ -60,6 +65,8 @@ func (q *Queue) DirectRun() {
 	for k, param := range item.Fparams {
 		in[k] = reflect.ValueOf(param)
 	}
+
+	log.Info("Queue Task Running")
 
 	f.Call(in)
 
