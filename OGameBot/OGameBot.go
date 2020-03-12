@@ -1,6 +1,12 @@
 package OGameBot
 
-import "bitbucket.org/jc01rho/ogame"
+import (
+	"bitbucket.org/jc01rho/ogame"
+	"github.com/emirpasic/gods/sets"
+)
+
+
+
 
 var OGameBotGlobal OGameBot
 
@@ -11,6 +17,8 @@ type OGameBot struct {
 	IsMainPlanetMoon      bool
 
 	Class ogame.CharacterClass
+
+	BuildRessSkipList  sets.Set
 
 	Universe string
 	Username string

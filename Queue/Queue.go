@@ -89,7 +89,7 @@ func Printtest(a int) {
 func InitQueue() {
 	newQ := new(Queue)
 	newQ.C = sync.NewCond(new(sync.Mutex))
-	newQ.Items = make(chan Jobs, 100)
+	newQ.Items = make(chan Jobs, 10)
 	newQ.Counter = 0
 
 	JobQueue = newQ
