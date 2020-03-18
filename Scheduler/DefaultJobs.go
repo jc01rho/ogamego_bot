@@ -16,8 +16,8 @@ func DefaultJobs() {
 	//Queue.JobQueue.Set(func() { OGameBot.OGameBotGlobal.MaintainLCCountStep(-1) })
 	//Queue.JobQueue.Set(func() { OGameBot.OGameBotGlobal.CollectRessRoutine() })
 	//Queue.JobQueue.Set(func() { OGameBot.OGameBotGlobal.BuildNextRess() })
-	Scheduler.Every(12).Hour().Do(Queue.JobQueue.Set, OGameBot.OGameBotGlobal.MaintainLCCountStep, -1)
-	Scheduler.Every(24).Hour().Do(Queue.JobQueue.Set, OGameBot.OGameBotGlobal.CollectRessRoutine)
+	Scheduler.Every(12).Hours().Do(Queue.JobQueue.Set, OGameBot.OGameBotGlobal.MaintainLCCountStep, -1)
+	Scheduler.Every(24).Hours().Do(Queue.JobQueue.Set, OGameBot.OGameBotGlobal.CollectRessRoutine)
 
 	go func() {
 		for {
