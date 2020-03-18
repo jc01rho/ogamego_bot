@@ -3,9 +3,11 @@ module github.com/jc01rho/ogamego_bot
 require (
 	bitbucket.org/jc01rho/ogame v0.0.0
 	github.com/BurntSushi/toml v0.3.1 // indirect
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
 	github.com/emirpasic/gods v1.12.0
-	github.com/jc01rho/gocron v1.0.3
+	github.com/jc01rho/gocron v0.0.0-20200317110215-1a3ca30ce0f3
 	github.com/labstack/echo v3.3.10+incompatible
+	github.com/labstack/gommon v0.3.0 // indirect
 	github.com/mattn/go-colorable v0.1.6 // indirect
 	github.com/mattn/go-runewidth v0.0.8 // indirect
 	github.com/sirupsen/logrus v1.4.2
@@ -18,6 +20,6 @@ require (
 	gopkg.in/yaml.v2 v2.2.7 // indirect
 )
 
-replace bitbucket.org/jc01rho/ogame => ../../../bitbucket.org/jc01rho/ogame
+replace bitbucket.org/jc01rho/ogame => ../ogame
 
 go 1.14
