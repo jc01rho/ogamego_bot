@@ -17,7 +17,7 @@ func DefaultJobs() {
 
 	//Scheduler.Every(1).Second().Do(JustPrint)
 
-	Scheduler.Every(5).Minutes().Do(Queue.JobQueue.Set, HeaertBeat)
+	Scheduler.Every(10).Seconds().Do(Queue.JobQueue.Set, HeaertBeat)
 	Scheduler.Every(6).Hours().Do(Queue.JobQueue.Set, OGameBot.OGameBotGlobal.BuildNextRess)
 	//Queue.JobQueue.Set(func() { OGameBot.OGameBotGlobal.MaintainLCCountStep(-1) })
 	//Queue.JobQueue.Set(func() { OGameBot.OGameBotGlobal.CollectRessRoutine() })
