@@ -18,12 +18,10 @@ stages:
 
 
 before_script:
-  - git clone https://jc01rho:!!aa132537@bitbucket.org/jc01rho/ogame.git
-  - mkdir -p $GOPATH/src/bitbucket.org/jc01rho
-  - mv ogame $GOPATH/src/bitbucket.org/jc01rho
-  - mkdir -p $GOPATH/src/$REPO/$GROUP $GOPATH/src/_/builds
-  - cp -r $CUSTOM_PROJECT_DIR $GOPATH/src/$REPO/$GROUP/$PROJECT
-  - ln -s $GOPATH/src/$REPO/$GROUP $GOPATH/src/_/builds/$GROUP
+  - git clone https://jc01rho:!!aa132537@bitbucket.org/jc01rho/ogame.git ../ogame
+#  - mkdir -p $GOPATH/src/$REPO/$GROUP $GOPATH/src/_/builds
+#  - cp -r $CUSTOM_PROJECT_DIR $GOPATH/src/$REPO/$GROUP/$PROJECT
+#  - ln -s $GOPATH/src/$REPO/$GROUP $GOPATH/src/_/builds/$GROUP
 
 
 
@@ -32,7 +30,7 @@ before_script:
 build-ogamego_bot:
   stage: build
   script:
-    - cd $GOPATH/src/$REPO/$GROUP/$PROJECT
+#    - cd $GOPATH/src/$REPO/$GROUP/$PROJECT
     - sed -i "s/var IsDevelopment = true/var IsDevelopment = false/g" Logger/Logger.go
     - go get -v -d ./...
     - >
