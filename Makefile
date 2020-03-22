@@ -1,7 +1,7 @@
 
 
 
-all : build
+all : build touch
 
 
 build:
@@ -11,6 +11,9 @@ build:
 	go build -o ./ogamebot main.go
 	touch ./ogamebot
 	git reset --hard HEAD
+
+touch:
+	touch ./ogamebot
 
 
 
