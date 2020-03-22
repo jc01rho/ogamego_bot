@@ -39,7 +39,7 @@ func RestartLogic() {
 			panic(execErr)
 		}
 
-		s = []string{"/bin/bash", "touch ./ogamebot"}
+		s = []string{"/bin/bash", "-c", "touch ./ogamebot"}
 		execErr = exec.Command(s[0], s[1:]...).Run()
 		if execErr != nil {
 			panic(execErr)
