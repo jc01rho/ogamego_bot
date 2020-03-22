@@ -1,4 +1,4 @@
-package OGameBot
+package OGameBotRoutine
 
 import (
 	"bitbucket.org/jc01rho/ogame"

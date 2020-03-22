@@ -1,4 +1,4 @@
-package OGameBot
+package OGameBotRoutine
 
 import (
 	"bitbucket.org/jc01rho/ogame"
@@ -23,7 +23,6 @@ func (bot *OGameBot) BuildNextRess() {
 
 	bot.BuildRessSkipList.Add(targetPlanet)
 
-
 	if !CurrentRessInTargetPlanet.CanAfford(NeedsRess) {
 		log.Info("Not Enough Ress for buildRess, Checking Main")
 		RessinMainPlanet, _ := bot.Ogamebot.GetResources(bot.MainPlanetCelestitial)
@@ -37,8 +36,8 @@ func (bot *OGameBot) BuildNextRess() {
 				//TODO : 지연 빌드 혹은 지연 큐 삽입 테스트 필요
 				log.Infof("%s Sleep %d secs and Build command will be added to queue", Logger.CurrentFileNameAndLine(), timnes+30)
 				time.Sleep(time.Second*time.Duration(timnes) + time.Second*30)
-				log.Info("RessBuilding Built")
-				Queue.JobQueue.Set(func() { OgameUtil.BuildTargetBuilding(bot.Ogamebot, targetPlanet.ID.Celestial(), *targetBuilding) })
+				log.Info("RessBuilding Lazy Built")
+				Queue.JobQueue.Set(Queue.DefaultPriority, func() { OgameUtil.BuildTargetBuilding(bot.Ogamebot, targetPlanet.ID.Celestial(), *targetBuilding) })
 				bot.BuildRessSkipList.Remove(targetPlanet)
 
 			}()
@@ -54,7 +53,7 @@ func (bot *OGameBot) BuildNextRess() {
 	} else {
 
 		OgameUtil.BuildTargetBuilding(bot.Ogamebot, targetPlanet.ID.Celestial(), *targetBuilding)
-		log.Info("RessBuilding Built")
+		log.Info("RessBuilding Immdiately Built")
 		bot.BuildRessSkipList.Remove(targetPlanet)
 	}
 

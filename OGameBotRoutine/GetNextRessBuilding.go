@@ -1,4 +1,4 @@
-package OGameBot
+package OGameBotRoutine
 
 import (
 	"bitbucket.org/jc01rho/ogame"
@@ -6,7 +6,7 @@ import (
 	"math"
 )
 
-func  (bot *OGameBot) GetNextResBuilding() (*ogame.Planet, *ogame.BaseBuilding, int64) {
+func (bot *OGameBot) GetNextResBuilding() (*ogame.Planet, *ogame.BaseBuilding, int64) {
 
 	planets := bot.Ogamebot.GetCachedPlanets()
 	var targetPlanet *ogame.Planet = nil
@@ -20,13 +20,12 @@ func  (bot *OGameBot) GetNextResBuilding() (*ogame.Planet, *ogame.BaseBuilding, 
 		if bot.BuildRessSkipList.Contains(elm) {
 			continue
 		}
-		a,b,_,_ := elm.ConstructionsBeingBuilt()
-		if a !=0 && b != 0 {
-		continue
+		a, b, _, _ := elm.ConstructionsBeingBuilt()
+		if a != 0 && b != 0 {
+			continue
 		}
 
-
-			resbuildings, _ := elm.GetResourcesBuildings()
+		resbuildings, _ := elm.GetResourcesBuildings()
 		energy, _ := elm.GetResources()
 
 		temp, _ := bot.Ogamebot.GetShips(elm.ID.Celestial())

@@ -1,12 +1,9 @@
-package OGameBot
+package OGameBotRoutine
 
 import (
 	"bitbucket.org/jc01rho/ogame"
 	"github.com/emirpasic/gods/sets"
 )
-
-
-
 
 var OGameBotGlobal OGameBot
 
@@ -18,7 +15,7 @@ type OGameBot struct {
 
 	Class ogame.CharacterClass
 
-	BuildRessSkipList  sets.Set
+	BuildRessSkipList sets.Set
 
 	Universe string
 	Username string

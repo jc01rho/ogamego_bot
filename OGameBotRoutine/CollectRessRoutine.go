@@ -1,4 +1,4 @@
-package OGameBot
+package OGameBotRoutine
 
 import (
 	"github.com/jc01rho/ogamego_bot/OgameUtil"
@@ -17,7 +17,7 @@ func (bot *OGameBot) CollectRessRoutine() {
 
 			if currentRess.Total() >= currentCap {
 
-				bot.MaintainLCCountStepSpecificPlanet(elm,-1)
+				bot.MaintainLCCountStepSpecificPlanet(elm, -1)
 
 			} else {
 				bot.SendRessRoutineFromCelestitial(elm.ID.Celestial(), currentRess, bot.MainPlanetCoord)
