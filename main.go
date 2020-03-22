@@ -367,14 +367,14 @@ func start(c *cli.Context) error {
 	go func() {
 		/*
 			planets := bot.GetCachedPlanets()
-			bot.GetResourcesBuildings(planets[0].ID.Celestial())
+			bot.GetResourcesBuildings(planets[0].GetID())
 
-			log.Printf("Resources Buildings: %d", bot.PlanetResources[planets[0].ID.Celestial()].Metal.Available)
-			log.Printf("Resources Buildings: %s", bot.PlanetResourcesBuildings[planets[0].ID.Celestial()])
+			log.Printf("Resources Buildings: %d", bot.PlanetResources[planets[0].GetID()].Metal.Available)
+			log.Printf("Resources Buildings: %s", bot.PlanetResourcesBuildings[planets[0].GetID()])
 
 			time.Sleep(time.Duration(60) * time.Second)
 
-			log.Printf("Facilities: %s", bot.PlanetFacilities[planets[0].ID.Celestial()])
+			log.Printf("Facilities: %s", bot.PlanetFacilities[planets[0].GetID()])
 		*/
 	}()
 

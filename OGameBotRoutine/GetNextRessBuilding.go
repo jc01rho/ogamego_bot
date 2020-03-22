@@ -28,7 +28,7 @@ func (bot *OGameBot) GetNextResBuilding() (*ogame.Planet, *ogame.BaseBuilding, i
 		resbuildings, _ := elm.GetResourcesBuildings()
 		energy, _ := elm.GetResources()
 
-		temp, _ := bot.Ogamebot.GetShips(elm.ID.Celestial())
+		temp, _ := bot.Ogamebot.GetShips(elm.GetID())
 
 		temp2 := bot.Ogamebot.GetUserInfos()
 

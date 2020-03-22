@@ -13,7 +13,7 @@ func (bot *OGameBot) BuildNextRess() {
 
 	log.Info("BuildNextRess start")
 	targetPlanet, targetBuilding, level := bot.GetNextResBuilding()
-	CurrentRessInTargetPlanet, _ := bot.Ogamebot.GetResources(targetPlanet.ID.Celestial())
+	CurrentRessInTargetPlanet, _ := bot.Ogamebot.GetResources(targetPlanet.GetID())
 	NeedsRess := targetBuilding.GetPrice(level + 1)
 	//bot.Ogamebot.Abandon()
 	if bot.BuildRessSkipList.Contains(targetPlanet) {
@@ -25,19 +25,19 @@ func (bot *OGameBot) BuildNextRess() {
 
 	if !CurrentRessInTargetPlanet.CanAfford(NeedsRess) {
 		log.Info("Not Enough Ress for buildRess, Checking Main")
-		RessinMainPlanet, _ := bot.Ogamebot.GetResources(bot.MainPlanetCelestitial)
+		RessinMainPlanet, _ := bot.Ogamebot.GetResources(bot.MainPlanetCelestitial.GetID())
 		if CurrentRessInTargetPlanet.Add(RessinMainPlanet).CanAfford(NeedsRess) {
 
 			log.Infof("%s Sending ress from Main[%s] to %s", Logger.CurrentFileNameAndLine(), bot.MainPlanetCoord, targetPlanet.Coordinate)
 			bot.SendRessRoutineFromCelestitial(bot.MainPlanetCelestitial, NeedsRess.Sub(CurrentRessInTargetPlanet), targetPlanet.Coordinate)
-			timnes, _ := bot.Ogamebot.FlightTime(bot.Ogamebot.GetCachedCelestialByID(bot.MainPlanetCelestitial).GetCoordinate(), targetPlanet.Coordinate, ogame.HundredPercent, ogame.ShipsInfos{LargeCargo: 1})
+			timnes, _ := bot.Ogamebot.FlightTime(bot.MainPlanetCelestitial.GetCoordinate(), targetPlanet.Coordinate, ogame.HundredPercent, ogame.ShipsInfos{LargeCargo: 1})
 
 			go func() {
 				//TODO : 지연 빌드 혹은 지연 큐 삽입 테스트 필요
 				log.Infof("%s Sleep %d secs and Build command will be added to queue", Logger.CurrentFileNameAndLine(), timnes+30)
 				time.Sleep(time.Second*time.Duration(timnes) + time.Second*30)
 				log.Info("RessBuilding Lazy Built")
-				Queue.JobQueue.Set(Queue.DefaultPriority, func() { OgameUtil.BuildTargetBuilding(bot.Ogamebot, targetPlanet.ID.Celestial(), *targetBuilding) })
+				Queue.JobQueue.Set(Queue.DefaultPriority, func() { OgameUtil.BuildTargetBuilding(bot.Ogamebot, targetPlanet.GetID(), *targetBuilding) })
 				bot.BuildRessSkipList.Remove(targetPlanet)
 
 			}()
@@ -52,7 +52,7 @@ func (bot *OGameBot) BuildNextRess() {
 
 	} else {
 
-		OgameUtil.BuildTargetBuilding(bot.Ogamebot, targetPlanet.ID.Celestial(), *targetBuilding)
+		OgameUtil.BuildTargetBuilding(bot.Ogamebot, targetPlanet.GetID(), *targetBuilding)
 		log.Info("RessBuilding Immdiately Built")
 		bot.BuildRessSkipList.Remove(targetPlanet)
 	}

@@ -42,17 +42,17 @@ func (bot *OGameBot) CollectRessRoutine() {
 				}
 
 				if toSend.Total() == currentCap {
-					bot.SendRessRoutineFromCelestitial(elm.ID.Celestial(), toSend, bot.MainPlanetCoord)
+					bot.SendRessRoutineFromCelestitial(elm, toSend, bot.MainPlanetCoord)
 				} else {
 					toSend.Deuterium = currentRess.Deuterium
 					if toSend.Total() >= currentCap {
 						toSend.Deuterium -= (toSend.Total() - currentCap)
 					}
-					bot.SendRessRoutineFromCelestitial(elm.ID.Celestial(), toSend, bot.MainPlanetCoord)
+					bot.SendRessRoutineFromCelestitial(elm, toSend, bot.MainPlanetCoord)
 				}
 
 			} else {
-				bot.SendRessRoutineFromCelestitial(elm.ID.Celestial(), currentRess, bot.MainPlanetCoord)
+				bot.SendRessRoutineFromCelestitial(elm, currentRess, bot.MainPlanetCoord)
 			}
 
 		}
