@@ -22,7 +22,7 @@ func RestartLogic() {
 	}
 	buffer.WriteString(" &")
 
-	arguemntString := buffer.String()
+	//arguemntString := buffer.String()
 	if runtime.GOOS == "windows" {
 		//args := []string {"/c","..\\run.bat"}
 
