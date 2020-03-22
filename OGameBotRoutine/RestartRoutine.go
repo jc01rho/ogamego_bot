@@ -12,7 +12,7 @@ func RestartLogic() {
 	log.Info("Restart Logic Started")
 
 	var buffer bytes.Buffer
-	buffer.WriteString("killall ogamebot && ./ogamebot ")
+	buffer.WriteString("killall ogamebot && nohup ./ogamebot ")
 	for i, elm := range os.Args {
 		if i == 0 {
 			continue
@@ -20,6 +20,7 @@ func RestartLogic() {
 		buffer.WriteString(elm)
 
 	}
+	buffer.WriteString(" &")
 
 	arguemntString := buffer.String()
 	if runtime.GOOS == "windows" {
