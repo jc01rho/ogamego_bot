@@ -7,8 +7,10 @@ import (
 	"math"
 )
 
-func (bot *OGameBot) SendRessRoutineFromCelestitial(fromCelestitial ogame.CelestialID, amount ogame.Resources, to ogame.Coordinate) bool {
-	currentRess, _ := bot.Ogamebot.GetResources(fromCelestitial)
+func (bot *OGameBot) SendRessRoutineFromCelestitial(fromCelestitial ogame.Celestial, amount ogame.Resources, to ogame.Coordinate) bool {
+
+	log.Info("SendRess ", fromCelestitial.GetCoordinate(), " to ", to, " with ", amount)
+	currentRess, _ := bot.Ogamebot.GetResources(fromCelestitial.GetID())
 	currentResearch := bot.Ogamebot.GetCachedResearch()
 
 	remaining := currentRess.SubReal(amount)
@@ -18,7 +20,7 @@ func (bot *OGameBot) SendRessRoutineFromCelestitial(fromCelestitial ogame.Celest
 		return false
 	}
 
-	currentShips, _ := bot.Ogamebot.GetShips(fromCelestitial)
+	currentShips, _ := bot.Ogamebot.GetShips(fromCelestitial.GetID())
 	LCCaps := ogame.LargeCargo.GetCargoCapacity(currentResearch, bot.Ogamebot.GetServer().Settings.EspionageProbeRaids != 0, bot.Class == ogame.Collector)
 	//SCCaps := ogame.SmallCargo.GetCargoCapacity(currentResearch, bot.Ogamebot.GetServer().Settings.EspionageProbeRaids != 0 , bot.Class == ogame.Collector)
 	SCCaps := OgameUtil.GetCapacityOfCurrentBot(bot.Ogamebot, ogame.SmallCargo.BaseShip)
@@ -34,26 +36,30 @@ func (bot *OGameBot) SendRessRoutineFromCelestitial(fromCelestitial ogame.Celest
 	//only LC available,
 	if LCCaps*currentShips.LargeCargo >= OgameUtil.ResourcePricesSum(amount) {
 		NeededLCs := int64(math.Ceil(float64(OgameUtil.ResourcePricesSum(amount)) / float64(LCCaps)))
-		_, Fuels := bot.Ogamebot.FlightTime(bot.Ogamebot.GetCachedCelestialByID(fromCelestitial).GetCoordinate(), to, ogame.HundredPercent, ogame.ShipsInfos{LargeCargo: NeededLCs})
+		_, Fuels := bot.Ogamebot.FlightTime(bot.Ogamebot.GetCachedCelestialByID(fromCelestitial.GetID()).GetCoordinate(), to, ogame.HundredPercent, ogame.ShipsInfos{LargeCargo: NeededLCs})
 		NeededLCs += int64(math.Ceil(float64(Fuels) / float64(LCCaps)))
 
 		if NeededLCs <= currentShips.LargeCargo {
 			ships := make([]ogame.Quantifiable, 0)
 			ships = append(ships, ogame.Quantifiable{ID: ogame.LargeCargoID, Nbr: int64(NeededLCs)})
 
-			bot.Ogamebot.SendFleet(fromCelestitial, ships, ogame.HundredPercent, to, ogame.Transport, amount, 0, 0)
+			bot.Ogamebot.SendFleet(fromCelestitial.GetID(), ships, ogame.HundredPercent, to, ogame.Transport, amount, 0, 0)
+			log.Info("SendRess  success")
+			currentRess, _ = bot.Ogamebot.GetResources(fromCelestitial.GetID())
+			log.Info("remaing of ", fromCelestitial.GetCoordinate(), " is ", currentRess)
 
 			return true
 		}
 
 	}
+	log.Info("SendRess  failed")
 	return false
 }
 
 func (bot *OGameBot) SendRessRoutine(from *ogame.Planet, amount ogame.Resources, to ogame.Coordinate) bool {
-	return bot.SendRessRoutineFromCelestitial(from.ID.Celestial(), amount, to)
+	return bot.SendRessRoutineFromCelestitial(from, amount, to)
 }
 
 func (bot *OGameBot) SendRessRoutineTargetPlanet(from *ogame.Planet, amount ogame.Resources, to *ogame.Planet) bool {
-	return bot.SendRessRoutineFromCelestitial(from.ID.Celestial(), amount, to.Coordinate)
+	return bot.SendRessRoutineFromCelestitial(from, amount, to.Coordinate)
 }
