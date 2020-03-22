@@ -1,6 +1,7 @@
 package Scheduler
 
 import (
+	"github.com/jc01rho/gocron"
 	"github.com/jc01rho/ogamego_bot/OGameBotRoutine"
 	"github.com/jc01rho/ogamego_bot/Queue"
 	log "github.com/sirupsen/logrus"
@@ -23,13 +24,13 @@ func DefaultJobs() {
 
 	//Scheduler.Every(1).Second().Do(Queue.JobQueue.Set, Queue.DefaultPriority, OGameBotRoutine.OGameBotGlobal.Ogamebot.IsUnderAttack)
 
-	Scheduler.Every(2).Seconds().Do(Queue.JobQueue.Set, Queue.CriticalPriority, OGameBotRoutine.RestartLogic)
-	Scheduler.Every(1).Hours().Do(Queue.JobQueue.Set, Queue.CriticalPriority, HeaertBeat)
-	Scheduler.Every(6).Hours().Do(Queue.JobQueue.Set, Queue.DefaultPriority, OGameBotRoutine.OGameBotGlobal.BuildNextRess)
+	Scheduler.Every(1).Day().At("08:00").Do(Queue.JobQueue.Set, Queue.CriticalPriority, OGameBotRoutine.RestartLogic)
+	Scheduler.Every(1).Hours().From(gocron.NextTick()).Do(Queue.JobQueue.Set, Queue.CriticalPriority, HeaertBeat)
+	Scheduler.Every(6).Hours().From(gocron.NextTick()).Do(Queue.JobQueue.Set, Queue.DefaultPriority, OGameBotRoutine.OGameBotGlobal.BuildNextRess)
 
-	Scheduler.Every(12).Hours().Do(Queue.JobQueue.Set, Queue.DefaultPriority, OGameBotRoutine.OGameBotGlobal.MaintainLCCountStep, -1)
+	Scheduler.Every(12).Hours().From(gocron.NextTick()).Do(Queue.JobQueue.Set, Queue.DefaultPriority, OGameBotRoutine.OGameBotGlobal.MaintainLCCountStep, -1)
 
-	Scheduler.Every(24).Hours().Do(Queue.JobQueue.Set, Queue.DefaultPriority, OGameBotRoutine.OGameBotGlobal.CollectRessRoutine)
+	Scheduler.Every(24).Hours().From(gocron.NextTick()).Do(Queue.JobQueue.Set, Queue.DefaultPriority, OGameBotRoutine.OGameBotGlobal.CollectRessRoutine)
 
 	go func() {
 		for {
