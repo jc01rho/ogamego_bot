@@ -12,6 +12,7 @@ func RestartLogic() {
 	log.Info("Restart Logic Started")
 
 	var buffer bytes.Buffer
+	buffer.WriteString("killall ogamebot && ./ogamebot ")
 	for i, elm := range os.Args {
 		if i == 0 {
 			continue
@@ -37,7 +38,7 @@ func RestartLogic() {
 			panic(execErr)
 		}
 
-		s = []string{"/bin/bash", "-c", "killall", "ogamebot", "&&", "./ogamebot", arguemntString}
+		s = []string{"/bin/bash", "-c", arguemntString}
 		execErr = exec.Command(s[0], s[1:]...).Run()
 		if execErr != nil {
 			panic(execErr)
