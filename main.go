@@ -37,19 +37,6 @@ func main() {
 	//autorestart.RestartFunc = autorestart.SendSIGUSR2 // usefull for `github.com/facebookgo/grace`
 
 	// or
-	autorestart.RestartFunc = func() {
-		if proc, err := os.FindProcess(os.Getpid()); err == nil {
-			proc.Signal(syscall.SIGHUP)
-		}
-	}
-
-	// Notifier
-	restart := autorestart.GetNotifier()
-	go func() {
-		<-restart
-		log.Info("I will restart shortly")
-
-	}()
 
 	autorestart.StartWatcher()
 
