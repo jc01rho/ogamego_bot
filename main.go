@@ -7,13 +7,16 @@ import (
 	"github.com/jc01rho/ogamego_bot/Logger"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
+	log "github.com/sirupsen/logrus"
+	"github.com/slayer/autorestart"
 	"gopkg.in/urfave/cli.v2"
 	"html/template"
 	"io"
-	"log"
 	"net/http"
 	"os"
 	"strconv"
+	"syscall"
+	"time"
 )
 
 //텔레그램 테스트 봇 토큰 / golang_test_jc / 781061948:AAHhMNvHv2RN0uIarC8DIQP9F6ShYhP0CY8
@@ -25,6 +28,31 @@ var date = ""
 func main() {
 
 	Logger.InitLogger()
+
+	// set period
+	autorestart.WatchPeriod = 3 * time.Second
+	// custom file to watch
+	autorestart.WatchFilename = "./ogamebot"
+	// custom restart function
+	//autorestart.RestartFunc = autorestart.SendSIGUSR2 // usefull for `github.com/facebookgo/grace`
+
+	// or
+	autorestart.RestartFunc = func() {
+		if proc, err := os.FindProcess(os.Getpid()); err == nil {
+			proc.Signal(syscall.SIGHUP)
+		}
+	}
+
+	// Notifier
+	restart := autorestart.GetNotifier()
+	go func() {
+		<-restart
+		log.Info("I will restart shortly")
+
+	}()
+
+	autorestart.StartWatcher()
+
 	//--universe=Vega --username=rkjnice@gmail.com --password=aa132537 --language=en --port=27000 --host=0.0.0.0 --api-new-hostname=http://localhost:27000
 
 	//go Telegram.BotInit(telegramBotToken)

@@ -29,6 +29,7 @@ func InitLogger() {
 	} else {
 		log.SetFormatter(&log.TextFormatter{TimestampFormat: "2006-01-02 15:04:05"})
 		log.SetLevel(log.DebugLevel)
+
 		logMultiWriter = io.MultiWriter(os.Stdout, lumberjackLogrotate)
 	}
 
