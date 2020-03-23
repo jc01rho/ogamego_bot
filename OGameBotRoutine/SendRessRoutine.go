@@ -51,6 +51,9 @@ func (bot *OGameBot) SendRessRoutineFromCelestitial(fromCelestitial ogame.Celest
 			return true
 		}
 
+	} else {
+		log.Info("Current LC Caps ", LCCaps*currentShips.LargeCargo)
+		log.Info("Tried Sending  LC Caps ", OgameUtil.ResourcePricesSum(amount))
 	}
 	log.Info("SendRess  failed")
 	return false
