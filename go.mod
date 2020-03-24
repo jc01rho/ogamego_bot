@@ -12,7 +12,6 @@ require (
 	github.com/mattn/go-runewidth v0.0.8 // indirect
 	github.com/sirupsen/logrus v1.4.2
 	github.com/slayer/autorestart v0.0.0-20170706172704-7bc8d250279b
-	golang.org/x/crypto v0.0.0-20200210222208-86ce3cb69678 // indirect
 	golang.org/x/net v0.0.0-20200301022130-244492dfa37a // indirect
 	golang.org/x/sys v0.0.0-20200302150141-5c8b2ff67527 // indirect
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0

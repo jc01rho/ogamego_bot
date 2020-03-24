@@ -29,7 +29,7 @@ func main() {
 	Logger.InitLogger()
 
 	// set period
-	autorestart.WatchPeriod = 3 * time.Second
+	autorestart.WatchPeriod = 10 * time.Second
 	// custom file to watch
 	autorestart.WatchFilename = "./ogamebot"
 	// custom restart function
