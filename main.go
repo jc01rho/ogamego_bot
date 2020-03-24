@@ -3,18 +3,20 @@ package main
 import (
 	"bitbucket.org/jc01rho/ogame"
 	"crypto/subtle"
+	"github.com/SeitArt/autorestart"
 	"github.com/jc01rho/ogamego_bot/Global"
 	"github.com/jc01rho/ogamego_bot/Logger"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	log "github.com/sirupsen/logrus"
-	"github.com/teamwork/reload"
+	//"github.com/teamwork/reload"
 	"gopkg.in/urfave/cli.v2"
 	"html/template"
 	"io"
 	"net/http"
 	"os"
 	"strconv"
+	"time"
 )
 
 //텔레그램 테스트 봇 토큰 / golang_test_jc / 781061948:AAHhMNvHv2RN0uIarC8DIQP9F6ShYhP0CY8
@@ -26,24 +28,23 @@ var date = ""
 func main() {
 
 	Logger.InitLogger()
-
-	go func() {
-		err := reload.Do(log.Printf, reload.Dir("./bin", reload.Exec))
-		if err != nil {
-			panic(err)
-		}
-	}()
-
-	//// set period
-	//autorestart.WatchPeriod = 10 * time.Second
-	//// custom file to watch
-	//autorestart.WatchFilename = "./ogamebot"
-	//// custom restart function
-	////autorestart.RestartFunc = autorestart.SendSIGUSR2 // usefull for `github.com/facebookgo/grace`
 	//
-	//// or
-	//
-	//autorestart.StartWatcher()
+	//go func() {
+	//	err := reload.Do(log.Printf )
+	//	if err != nil {
+	//		panic(err)
+	//	}
+	//}()
+
+	// set period
+	autorestart.WatchPeriod = 10 * time.Second
+	// custom file to watch
+	autorestart.WatchFilename = "./ogamebot"
+	// custom restart function
+
+	// or
+
+	autorestart.StartWatcher()
 
 	//--universe=Vega --username=rkjnice@gmail.com --password=aa132537 --language=en --port=27000 --host=0.0.0.0 --api-new-hostname=http://localhost:27000
 
