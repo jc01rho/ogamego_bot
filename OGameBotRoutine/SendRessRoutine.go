@@ -28,7 +28,7 @@ func (bot *OGameBot) SendRessRoutineFromCelestitial(fromCelestitial ogame.Celest
 	currentCaps := LCCaps*currentShips.LargeCargo + SCCaps + currentShips.SmallCargo
 
 	if OgameUtil.ResourcePricesSum(amount) > currentCaps {
-		//TODO: not enouth cargo
+		log.Info("Not enouth Cargo")
 		return false
 	}
 
