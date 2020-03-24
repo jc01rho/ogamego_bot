@@ -37,11 +37,17 @@ func (bot *OGameBot) SendRessRoutineFromCelestitial(fromCelestitial ogame.Celest
 	if LCCaps*currentShips.LargeCargo >= OgameUtil.ResourcePricesSum(amount) {
 		NeededLCs := int64(math.Ceil(float64(OgameUtil.ResourcePricesSum(amount)) / float64(LCCaps)))
 		_, Fuels := bot.Ogamebot.FlightTime(bot.Ogamebot.GetCachedCelestialByID(fromCelestitial.GetID()).GetCoordinate(), to, ogame.HundredPercent, ogame.ShipsInfos{LargeCargo: NeededLCs})
-		NeededLCs += int64(math.Ceil(float64(Fuels) / float64(LCCaps)))
+		//NeededLCs += int64(math.Ceil(float64(Fuels) / float64(LCCaps)))
 
 		if NeededLCs <= currentShips.LargeCargo {
 			ships := make([]ogame.Quantifiable, 0)
 			ships = append(ships, ogame.Quantifiable{ID: ogame.LargeCargoID, Nbr: int64(NeededLCs)})
+
+			if amount.Deuterium > Fuels {
+				amount.Deuterium -= Fuels
+			} else {
+				amount.Deuterium = 0
+			}
 
 			bot.Ogamebot.SendFleet(fromCelestitial.GetID(), ships, ogame.HundredPercent, to, ogame.Transport, amount, 0, 0)
 			log.Info("SendRess  success")
