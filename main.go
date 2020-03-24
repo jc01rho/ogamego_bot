@@ -28,7 +28,7 @@ func main() {
 	Logger.InitLogger()
 
 	go func() {
-		err := reload.Do(log.Printf, reload.Dir(".", reload.Exec))
+		err := reload.Do(log.Printf, reload.Dir("./bin", reload.Exec))
 		if err != nil {
 			panic(err)
 		}
