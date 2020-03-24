@@ -32,7 +32,7 @@ build-ogamego_bot:
   script:
 #    - cd $GOPATH/src/$REPO/$GROUP/$PROJECT
     - sed -i "s/var IsDevelopment = true/var IsDevelopment = false/g" Logger/Logger.go
-    - go get -v -d ./...
+#    - go get -v -d ./...
     - >
       for GOOSV in darwin linux; do
         for GOARCHV in 386 amd64; do
