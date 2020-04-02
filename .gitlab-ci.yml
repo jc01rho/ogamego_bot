@@ -51,7 +51,7 @@ build-ogamego_bot:
 
   artifacts:
     paths:
-      - ${ARTIFACTS_DIR}
+      - $CUSTOM_PROJECT_DIR/${ARTIFACTS_DIR}
     expire_in: 1 week
 
 
@@ -60,5 +60,7 @@ publish:
   stage: publish
   only:
     - tags
+  dependencies:
+    - build
   script:
     - gitlab-release --message 'Releases' $CUSTOM_PROJECT_DIR/${ARTIFACTS_DIR}/*
