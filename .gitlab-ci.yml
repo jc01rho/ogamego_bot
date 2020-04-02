@@ -14,6 +14,7 @@ variables:
 
 stages:
   - build
+  - publish
 
 
 
@@ -51,5 +52,13 @@ build-ogamego_bot:
   artifacts:
     paths:
       - ${ARTIFACTS_DIR}
+    expire_in: 1 week
 
 
+publish:
+  image: inetprocess/gitlab-release
+  stage: publish
+  only:
+    - tags
+  script:
+    - gitlab-release --message 'My release message' $CUSTOM_PROJECT_DIR/${ARTIFACTS_DIR}/*
