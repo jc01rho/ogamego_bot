@@ -61,4 +61,4 @@ publish:
   only:
     - tags
   script:
-    - gitlab-release --message 'My release message' $CUSTOM_PROJECT_DIR/${ARTIFACTS_DIR}/*
+    - gitlab-release --message 'Releases' $CUSTOM_PROJECT_DIR/${ARTIFACTS_DIR}/*
