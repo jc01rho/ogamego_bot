@@ -32,6 +32,7 @@ jobs:
 
     - name: Build
       run: |
+        sed -i "s/var IsDevelopment = true/var IsDevelopment = false/g" Logger/Logger.go
         for GOOSV in darwin linux; do
           for GOARCHV in 386 amd64; do
             #env GOOS=$GOOSV GOARCH=$GOARCHV go build -v -o ./bin/ogame-bot-$GOOSV-$GOARCHV
