@@ -47,11 +47,13 @@ jobs:
             env GOOS=$GOOSV GOARCH=$GOARCHV go build -o ./bin/ogame-bot-$GOOSV-$GOARCHV.exe
           done
         done
-        
-    - name: Upload artifact
-      uses: actions/upload-artifact@v1.0.0
+       
+
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
       with:
-        # Artifact name
-        name: Releases
-        # Directory containing files to upload
-        path: ./bin/
+        files: ./bin/ogame-bot*
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
