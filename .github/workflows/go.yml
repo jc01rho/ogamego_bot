@@ -37,14 +37,14 @@ jobs:
       run: |
         for GOOSV in darwin linux; do
           for GOARCHV in 386 amd64; do
-          #env GOOS=$GOOSV GOARCH=$GOARCHV go build -v -o ./bin/ogame-bot-$GOOSV-$GOARCHV
-          env GOOS=$GOOSV GOARCH=$GOARCHV go build -o ./bin/ogame-bot-$GOOSV-$GOARCHV
+            #env GOOS=$GOOSV GOARCH=$GOARCHV go build -v -o ./bin/ogame-bot-$GOOSV-$GOARCHV
+            env GOOS=$GOOSV GOARCH=$GOARCHV go build -o ./bin/ogame-bot-$GOOSV-$GOARCHV
           done
         done
         for GOOSV in windows; do
           for GOARCHV in 386 amd64; do
-              #env GOOS=$GOOSV GOARCH=$GOARCHV go build -v -o ./bin/ogame-bot-$GOOSV-$GOARCHV.exe
-              env GOOS=$GOOSV GOARCH=$GOARCHV go build -o ./bin/ogame-bot-$GOOSV-$GOARCHV.exe
+            #env GOOS=$GOOSV GOARCH=$GOARCHV go build -v -o ./bin/ogame-bot-$GOOSV-$GOARCHV.exe
+            env GOOS=$GOOSV GOARCH=$GOARCHV go build -o ./bin/ogame-bot-$GOOSV-$GOARCHV.exe
           done
         done
         
