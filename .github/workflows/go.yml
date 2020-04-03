@@ -54,4 +54,4 @@ jobs:
         # Artifact name
         name: Releases
         # Directory containing files to upload
-        path: ./bin/*
+        path: ./bin/
