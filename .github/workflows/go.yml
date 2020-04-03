@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - name: Set up Go 1.13
+    - name: Set up Go 1.14
       uses: actions/setup-go@v1
       with:
         go-version: 1.14
@@ -33,8 +33,10 @@ jobs:
     - name: Build
       run: |
         sed -i "s/var IsDevelopment = true/var IsDevelopment = false/g" Logger/Logger.go
-        for GOOSV in darwin linux; do
-          for GOARCHV in 386 amd64; do
+        #for GOOSV in darwin linux; do
+        #  for GOARCHV in 386 amd64; do
+        for GOOSV in linux; do
+          for GOARCHV in amd64; do
             #env GOOS=$GOOSV GOARCH=$GOARCHV go build -v -o ./bin/ogame-bot-$GOOSV-$GOARCHV
             env GOOS=$GOOSV GOARCH=$GOARCHV go build -o ./bin/ogame-bot-$GOOSV-$GOARCHV
           done
