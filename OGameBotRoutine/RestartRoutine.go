@@ -33,8 +33,14 @@ func RestartLogic() {
 		}
 
 	} else {
-		s := []string{"/bin/bash", "-c", "make", "all"}
+		s := []string{"/bin/bash", "-c", "updateApp.sh", "latest", "ogamebotNew"}
 		execErr := exec.Command(s[0], s[1:]...).Run()
+		if execErr != nil {
+			panic(execErr)
+		}
+
+		s = []string{"/bin/bash", "-c", "mv", "ogamebotNew", "ogamebot"}
+		execErr = exec.Command(s[0], s[1:]...).Run()
 		if execErr != nil {
 			panic(execErr)
 		}
