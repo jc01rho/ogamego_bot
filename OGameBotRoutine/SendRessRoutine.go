@@ -18,6 +18,10 @@ func (bot *OGameBot) SendRessRoutineFromCelestitial(fromCelestitial ogame.Celest
 		log.Error("NotEnough Ress for send")
 		//TODO: not enough ress
 		return false
+	} else if amount.Total() == 0 {
+		log.Info("0 Ress for send")
+		//TODO: not enough ress
+		return true
 	}
 
 	currentShips, _ := bot.Ogamebot.GetShips(fromCelestitial.GetID())
