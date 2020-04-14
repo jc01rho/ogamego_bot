@@ -2,12 +2,15 @@ package OGameBotRoutine
 
 import (
 	"bitbucket.org/jc01rho/ogame"
+
 	"github.com/jc01rho/ogamego_bot/OgameUtil"
+	log "github.com/sirupsen/logrus"
 	"math"
 )
 
 func (bot *OGameBot) GetNextResBuilding() (*ogame.Planet, *ogame.BaseBuilding, int64) {
 
+	log.Info("GetNextResBuilding start")
 	planets := bot.Ogamebot.GetCachedPlanets()
 	var targetPlanet *ogame.Planet = nil
 	var targetBuilding *ogame.BaseBuilding = nil
@@ -17,26 +20,20 @@ func (bot *OGameBot) GetNextResBuilding() (*ogame.Planet, *ogame.BaseBuilding, i
 
 	for _, elm := range planets {
 
-		if bot.BuildRessSkipList.Contains(elm) {
-			continue
-		}
 		a, b, _, _ := elm.ConstructionsBeingBuilt()
 		if a != 0 && b != 0 {
+			log.Info("GetNextResBuilding start")
+			continue
+		} else {
+			bot.BuildRessSkipList.Remove(elm)
+		}
+
+		if bot.BuildRessSkipList.Contains(elm) {
 			continue
 		}
 
 		resbuildings, _ := elm.GetResourcesBuildings()
 		energy, _ := elm.GetResources()
-
-		temp, _ := bot.Ogamebot.GetShips(elm.GetID())
-
-		temp2 := bot.Ogamebot.GetUserInfos()
-
-		temp3 := bot.Ogamebot.GetServer().Settings.EspionageProbeRaids
-
-		_ = temp2
-		_ = temp
-		_ = temp3
 
 		if energy.Energy < 0 && resbuildings.SolarPlant < 22 {
 
@@ -70,6 +67,11 @@ func (bot *OGameBot) GetNextResBuilding() (*ogame.Planet, *ogame.BaseBuilding, i
 
 		}
 
+	}
+
+	if targetPlanet != nil && targetBuilding != nil {
+		log.Info("GetNextResBuilding will be return.")
+		log.Infof("target ressbuilding is %s : %s %s ", targetPlanet.Coordinate, targetBuilding.Name, currentLevel+1)
 	}
 
 	return targetPlanet, targetBuilding, currentLevel
