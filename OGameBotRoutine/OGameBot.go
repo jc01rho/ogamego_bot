@@ -10,7 +10,11 @@ var OGameBotGlobal OGameBot
 type OGameBot struct {
 	Ogamebot              *ogame.OGame
 	MainPlanetCoord       ogame.Coordinate
-	MainPlanetCelestitial ogame.Celestial
+	MainCelestitial ogame.Celestial
+	MainPlanetCelestitial			  ogame.Celestial
+	MainPlanetMoonCelestitial ogame.Celestial
+
+
 	IsMainPlanetMoon      bool
 
 	Class ogame.CharacterClass
