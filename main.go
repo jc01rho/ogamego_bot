@@ -9,6 +9,8 @@ import (
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	log "github.com/sirupsen/logrus"
+	"runtime"
+
 	//"github.com/teamwork/reload"
 	"gopkg.in/urfave/cli.v2"
 	"html/template"
@@ -44,7 +46,9 @@ func main() {
 
 	// or
 
-	autorestart.StartWatcher()
+	if runtime.GOOS != "windows" {
+		autorestart.StartWatcher()
+	}
 
 	//--universe=Vega --username=rkjnice@gmail.com --password=aa132537 --language=en --port=27000 --host=0.0.0.0 --api-new-hostname=http://localhost:27000
 
