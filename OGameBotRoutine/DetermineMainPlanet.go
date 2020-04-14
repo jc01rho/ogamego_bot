@@ -15,13 +15,15 @@ func (bot *OGameBot) DetermineMainPlanet() {
 	for _, elm := range planets {
 		if lowsestID != nil {
 			if lowsestID.GetID() > elm.GetID() {
-				lowsestID = &elm
-				coordness = elm.GetCoordinate()
+				tempElm := elm
+				lowsestID = &tempElm
+				coordness = tempElm.GetCoordinate()
 			}
 
 		} else {
-			lowsestID = &elm
-			coordness = elm.GetCoordinate()
+			tempElm := elm
+			lowsestID = &tempElm
+			coordness = tempElm.GetCoordinate()
 		}
 	}
 
