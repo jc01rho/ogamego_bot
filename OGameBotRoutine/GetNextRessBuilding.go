@@ -9,8 +9,8 @@ import (
 func (bot *OGameBot) GetNextResBuilding() (*ogame.Planet, *ogame.BaseBuilding, int64) {
 
 	planets := bot.Ogamebot.GetCachedPlanets()
-	var targetPlanet *ogame.Planet = nil
-	var targetBuilding *ogame.BaseBuilding = nil
+	var targetPlanet ogame.Planet
+	var targetBuilding ogame.BaseBuilding
 	var lowsestPrice int64 = math.MaxInt64
 
 	var currentLevel int64 = -1
@@ -40,29 +40,29 @@ func (bot *OGameBot) GetNextResBuilding() (*ogame.Planet, *ogame.BaseBuilding, i
 
 		if energy.Energy < 0 && resbuildings.SolarPlant < 22 {
 
-			targetPlanet = &elm
-			targetBuilding = &ogame.SolarPlant.BaseBuilding
+			targetPlanet = elm
+			targetBuilding = ogame.SolarPlant.BaseBuilding
 			currentLevel = resbuildings.SolarPlant
 
-			return targetPlanet, targetBuilding, currentLevel
+			return &targetPlanet, &targetBuilding, currentLevel
 
 		} else {
 
 			if lowsestPrice > OgameUtil.ResourcePricesSum(ogame.MetalMine.GetPrice(resbuildings.MetalMine)) {
-				targetPlanet = &elm
-				targetBuilding = &ogame.MetalMine.BaseBuilding
+				targetPlanet = elm
+				targetBuilding = ogame.MetalMine.BaseBuilding
 				lowsestPrice = OgameUtil.ResourcePricesSum(ogame.MetalMine.GetPrice(resbuildings.MetalMine))
 				currentLevel = resbuildings.MetalMine
 
 			} else if lowsestPrice > OgameUtil.ResourcePricesSum(ogame.DeuteriumSynthesizer.GetPrice(resbuildings.DeuteriumSynthesizer)) {
-				targetPlanet = &elm
-				targetBuilding = &ogame.MetalMine.BaseBuilding
+				targetPlanet = elm
+				targetBuilding = ogame.MetalMine.BaseBuilding
 				lowsestPrice = OgameUtil.ResourcePricesSum(ogame.DeuteriumSynthesizer.GetPrice(resbuildings.DeuteriumSynthesizer))
 				currentLevel = resbuildings.DeuteriumSynthesizer
 
 			} else if lowsestPrice > OgameUtil.ResourcePricesSum(ogame.CrystalMine.GetPrice(resbuildings.CrystalMine)) {
-				targetPlanet = &elm
-				targetBuilding = &ogame.MetalMine.BaseBuilding
+				targetPlanet = elm
+				targetBuilding = ogame.MetalMine.BaseBuilding
 				lowsestPrice = OgameUtil.ResourcePricesSum(ogame.CrystalMine.GetPrice(resbuildings.CrystalMine))
 				currentLevel = resbuildings.CrystalMine
 
@@ -72,6 +72,6 @@ func (bot *OGameBot) GetNextResBuilding() (*ogame.Planet, *ogame.BaseBuilding, i
 
 	}
 
-	return targetPlanet, targetBuilding, currentLevel
+	return &targetPlanet, &targetBuilding, currentLevel
 
 }

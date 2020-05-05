@@ -9,6 +9,8 @@ import (
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	log "github.com/sirupsen/logrus"
+	"runtime"
+
 	//"github.com/teamwork/reload"
 	"gopkg.in/urfave/cli.v2"
 	"html/template"
@@ -43,8 +45,11 @@ func main() {
 	// custom restart function
 
 	// or
+	if runtime.GOOS == "windows" {
 
-	autorestart.StartWatcher()
+	} else {
+		autorestart.StartWatcher()
+	}
 
 	//--universe=Vega --username=rkjnice@gmail.com --password=aa132537 --language=en --port=27000 --host=0.0.0.0 --api-new-hostname=http://localhost:27000
 
@@ -448,7 +453,7 @@ func HTMLPlanet(c echo.Context) error {
 		Ships:           ogame.Ships,
 		Defenses:        ogame.Defenses,
 		Technologies:    ogame.Technologies,
-		Researches:      bot.Researches,
+		Researches:      bot.GetCachedData().Researches,
 	}
 
 	return c.Render(http.StatusOK, "planet", data)
@@ -476,7 +481,7 @@ func HTMLFlights(c echo.Context) error {
 		Destination  ogame.Planet
 	}{
 		Bot:          bot,
-		PlanetShips:  bot.PlanetShipsInfos[ogame.CelestialID(origin)],
+		PlanetShips:  bot.GetCachedData().PlanetShipsInfos[ogame.CelestialID(origin)],
 		Objs:         objs,
 		Buildings:    ogame.Buildings,
 		Ships:        ogame.Ships,
