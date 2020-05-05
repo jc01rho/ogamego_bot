@@ -27,12 +27,20 @@ func (bot *OGameBot) SendRessRoutineFromCelestitial(fromCelestitial ogame.Celest
 	currentShips, _ := bot.Ogamebot.GetShips(fromCelestitial.GetID())
 	LCCaps := ogame.LargeCargo.GetCargoCapacity(currentResearch, bot.Ogamebot.GetServer().Settings.EspionageProbeRaids != 0, bot.Class == ogame.Collector)
 	//SCCaps := ogame.SmallCargo.GetCargoCapacity(currentResearch, bot.Ogamebot.GetServer().Settings.EspionageProbeRaids != 0 , bot.Class == ogame.Collector)
-	SCCaps := OgameUtil.GetCapacityOfCurrentBot(bot.Ogamebot, ogame.SmallCargo.BaseShip)
+	_ = OgameUtil.GetCapacityOfCurrentBot(bot.Ogamebot, ogame.SmallCargo.BaseShip)
 
-	currentCaps := LCCaps*currentShips.LargeCargo + SCCaps + currentShips.SmallCargo
+	currentCaps := LCCaps * currentShips.LargeCargo
 
 	if OgameUtil.ResourcePricesSum(amount) > currentCaps {
-		log.Info("Not enouth Cargo")
+		log.Infof("Not enouth Cargo to SendRess, Needed : %d  Exist : %d", OgameUtil.ResourcePricesSum(amount)/LCCaps, currentCaps/LCCaps)
+
+		if bot.MainPlanetCelestitial.GetType() == ogame.PlanetType {
+			log.Info("Get into Build more LCs")
+
+			bot.MainPlanetCelestitial.Build(ogame.LargeCargo.ID, int64((OgameUtil.ResourcePricesSum(amount)-currentCaps)/LCCaps))
+
+		}
+
 		return false
 	}
 

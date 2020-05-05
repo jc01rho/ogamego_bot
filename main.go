@@ -45,9 +45,8 @@ func main() {
 	// custom restart function
 
 	// or
-	if runtime.GOOS == "windows" {
 
-	} else {
+	if runtime.GOOS != "windows" {
 		autorestart.StartWatcher()
 	}
 
@@ -453,7 +452,7 @@ func HTMLPlanet(c echo.Context) error {
 		Ships:           ogame.Ships,
 		Defenses:        ogame.Defenses,
 		Technologies:    ogame.Technologies,
-		Researches:      bot.GetCachedData().Researches,
+		Researches:      bot.Researches,
 	}
 
 	return c.Render(http.StatusOK, "planet", data)
@@ -481,7 +480,7 @@ func HTMLFlights(c echo.Context) error {
 		Destination  ogame.Planet
 	}{
 		Bot:          bot,
-		PlanetShips:  bot.GetCachedData().PlanetShipsInfos[ogame.CelestialID(origin)],
+		PlanetShips:  bot.PlanetShipsInfos[ogame.CelestialID(origin)],
 		Objs:         objs,
 		Buildings:    ogame.Buildings,
 		Ships:        ogame.Ships,
