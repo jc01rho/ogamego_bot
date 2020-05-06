@@ -26,6 +26,7 @@ func (bot *OGameBot) GetNextResBuilding() (*ogame.Planet, ogame.ID, int64) {
 		a, b, _, _ := elm.ConstructionsBeingBuilt()
 		if a != 0 && b != 0 {
 			log.Info("GetNextResBuilding start")
+			bot.BuildRessSkipList.Add(elm)
 			continue
 		} else {
 			bot.BuildRessSkipList.Remove(elm)
@@ -50,16 +51,30 @@ func (bot *OGameBot) GetNextResBuilding() (*ogame.Planet, ogame.ID, int64) {
 			return &targetPlanet, targetBuilding.ID, currentLevel
 
 		} else if energy.Energy < 0  {
-			targetPlanet = elm
-			targetBuilding = ogame.SolarSatellite.Base
-			currentLevel = 5
 
 
-			go func() {
-				time.Sleep(60*time.Second)
-				Queue.JobQueue.Set(Queue.DefaultPriority, OGameBotGlobal.BuildNextRess)
-			}()
-			return &targetPlanet, targetBuilding.ID, currentLevel
+			builtList,reaminingTime,_ := elm.GetProduction()
+			if len(builtList) > 0 {
+				bot.BuildRessSkipList.Add(elm)
+				go func() {
+					//TODO : 지연 빌드 혹은 지연 큐 삽입 테스트 필요
+					time.Sleep(time.Second*time.Duration(reaminingTime) + time.Second*30)
+					bot.BuildRessSkipList.Remove(targetPlanet)
+
+				}()
+				continue
+			} else {
+				targetPlanet = elm
+				targetBuilding = ogame.SolarSatellite.Base
+				currentLevel = 5
+				go func() {
+					time.Sleep(60*time.Second)
+					Queue.JobQueue.Set(Queue.DefaultPriority, OGameBotGlobal.BuildNextRess)
+				}()
+				return &targetPlanet, targetBuilding.ID, currentLevel
+			}
+
+
 
 		} else {
 
@@ -85,11 +100,6 @@ func (bot *OGameBot) GetNextResBuilding() (*ogame.Planet, ogame.ID, int64) {
 
 		}
 
-	}
-
-	if &targetPlanet != nil && &targetBuilding != nil {
-		log.Info("GetNextResBuilding will be return.")
-		log.Infof("target ressbuilding is %s : %s %s ", targetPlanet.Coordinate, targetBuilding.Name, currentLevel+1)
 	}
 
 	return &targetPlanet, targetBuilding.ID, currentLevel

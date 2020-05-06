@@ -24,7 +24,9 @@ func (bot *OGameBot) BuildNextRess() {
 		NeedsRess = targetObject.GetPrice(level)
 	}
 
+
 	//bot.Ogamebot.Abandon()
+
 	if bot.BuildRessSkipList.Contains(targetPlanet) {
 		log.Info("")
 		return
@@ -50,7 +52,7 @@ func (bot *OGameBot) BuildNextRess() {
 				log.Infof("%s Sleep %d secs and Build command will be added to queue", Logger.CurrentFileNameAndLine(), flightTime+30)
 				time.Sleep(time.Second*time.Duration(flightTime) + time.Second*30)
 				log.Infof(">>>>RessBuilding Lazy Built %s %s", targetPlanet.Coordinate.String(), targetObject.GetName())
-				Queue.JobQueue.Set(Queue.DefaultPriority, func() { OgameUtil.BuildTargetBuilding(bot.Ogamebot, targetPlanet.GetID(), targetObject) })
+				Queue.JobQueue.Set(Queue.DefaultPriority, func() { OgameUtil.BuildTargetBuilding(bot.Ogamebot, targetPlanet.GetID(), targetObject,level) })
 				bot.BuildRessSkipList.Remove(targetPlanet)
 
 			}()
@@ -65,7 +67,7 @@ func (bot *OGameBot) BuildNextRess() {
 
 	} else {
 
-		OgameUtil.BuildTargetBuilding(bot.Ogamebot, targetPlanet.GetID(), targetObject)
+		OgameUtil.BuildTargetBuilding(bot.Ogamebot, targetPlanet.GetID(), targetObject,level)
 		log.Info("RessBuilding Immdiately Built")
 		bot.BuildRessSkipList.Remove(targetPlanet)
 	}
