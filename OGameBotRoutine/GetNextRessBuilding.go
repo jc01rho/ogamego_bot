@@ -73,8 +73,7 @@ func (bot *OGameBot) GetNextResBuilding() (*ogame.Planet, *ogame.BaseBuilding, i
 
 	}
 
-
-	if &targetPlanet != nil && &targetBuilding !=  {
+	if &targetPlanet != nil && &targetBuilding != nil {
 		log.Info("GetNextResBuilding will be return.")
 		log.Infof("target ressbuilding is %s : %s %s ", targetPlanet.Coordinate, targetBuilding.Name, currentLevel+1)
 	}

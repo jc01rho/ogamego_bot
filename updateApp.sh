@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 #
 # gh-dl-release! It works!
+# ./updateApp.sh latest ogamebot
 # 
 # This script downloads an asset from latest or specific Github release of a
 # private repo. Feel free to extract more of the variables into command line
