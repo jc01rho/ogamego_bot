@@ -50,15 +50,14 @@ func (bot *OGameBot) GetNextResBuilding() (*ogame.Planet, ogame.ID, int64) {
 
 			return &targetPlanet, targetBuilding.ID, currentLevel
 
-		} else if energy.Energy < 0  {
+		} else if energy.Energy < 0 {
 
-
-			builtList,reaminingTime,_ := elm.GetProduction()
+			builtList, reaminingTime, _ := elm.GetProduction()
 			if len(builtList) > 0 {
 				bot.BuildRessSkipList.Add(elm)
 				go func() {
 					//TODO : 지연 빌드 혹은 지연 큐 삽입 테스트 필요
-					time.Sleep(time.Second*time.Duration(reaminingTime) + time.Second*30)
+					time.Sleep(time.Second*time.Duration(reaminingTime) + time.Second*300)
 					bot.BuildRessSkipList.Remove(targetPlanet)
 
 				}()
@@ -68,13 +67,11 @@ func (bot *OGameBot) GetNextResBuilding() (*ogame.Planet, ogame.ID, int64) {
 				targetBuilding = ogame.SolarSatellite.Base
 				currentLevel = 5
 				go func() {
-					time.Sleep(60*time.Second)
+					time.Sleep(60 * time.Second)
 					Queue.JobQueue.Set(Queue.DefaultPriority, OGameBotGlobal.BuildNextRess)
 				}()
 				return &targetPlanet, targetBuilding.ID, currentLevel
 			}
-
-
 
 		} else {
 
