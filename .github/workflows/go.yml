@@ -12,6 +12,18 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
+    - name: Notify slack success
+      if: success()
+      id: slack # IMPORTANT: reference this step ID value in future Slack steps
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      uses: voxmedia/github-action-slack-notify-build@v1
+      with:
+        channel: general
+        status: STARTING
+        color: warning
+          
+          
 
     - name: Set up Go 1.14
       uses: actions/setup-go@v1
@@ -50,6 +62,28 @@ jobs:
             env GOOS=$GOOSV GOARCH=$GOARCHV go build -o ./bin/ogame-bot-$GOOSV-$GOARCHV.exe
           done
         done
+        
+    - name: Notify slack success
+      if: success()
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      uses: voxmedia/github-action-slack-notify-build@v1
+      with:
+        message_id: ${{ steps.slack.outputs.message_id }}
+        channel: general
+        status: SUCCESS
+        color: good
+
+    - name: Notify slack fail
+      if: failure()
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      uses: voxmedia/github-action-slack-notify-build@v1
+      with:
+        message_id: ${{ steps.slack.outputs.message_id }}
+        channel: general
+        status: FAILED
+        color: danger
        
 
 
