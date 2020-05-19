@@ -6,6 +6,7 @@ import (
 	"github.com/jc01rho/ogamego_bot/Queue"
 	log "github.com/sirupsen/logrus"
 	"math"
+	"math/rand"
 	"time"
 )
 
@@ -57,7 +58,7 @@ func (bot *OGameBot) GetNextResBuilding() (*ogame.Planet, ogame.ID, int64) {
 				bot.BuildRessSkipList.Add(elm)
 				go func() {
 					//TODO : 지연 빌드 혹은 지연 큐 삽입 테스트 필요
-					time.Sleep(time.Second*time.Duration(reaminingTime) + time.Second*300)
+					time.Sleep(time.Second*time.Duration(reaminingTime) + time.Second*3600)
 					bot.BuildRessSkipList.Remove(targetPlanet)
 
 				}()
@@ -74,6 +75,28 @@ func (bot *OGameBot) GetNextResBuilding() (*ogame.Planet, ogame.ID, int64) {
 			}
 
 		} else {
+			s1 := rand.NewSource(time.Now().UnixNano())
+			random := rand.New(s1)
+
+			if resbuildings.DeuteriumSynthesizer > 18 && random.Intn(100) > 100-30 {
+				result, tempTargetPlanet, tempTargetBuildingID, tempCurrentLevel := bot.GetNextFacilityInBuildRess(elm)
+				if result {
+					return &tempTargetPlanet, tempTargetBuildingID, tempCurrentLevel
+				}
+
+			} else if resbuildings.DeuteriumSynthesizer > 12 && random.Intn(100) > 100-25 {
+				result, tempTargetPlanet, tempTargetBuildingID, tempCurrentLevel := bot.GetNextFacilityInBuildRess(elm)
+				if result {
+					return &tempTargetPlanet, tempTargetBuildingID, tempCurrentLevel
+				}
+
+			} else if resbuildings.DeuteriumSynthesizer > 6 && random.Intn(100) > 100-20 {
+				result, tempTargetPlanet, tempTargetBuildingID, tempCurrentLevel := bot.GetNextFacilityInBuildRess(elm)
+				if result {
+					return &tempTargetPlanet, tempTargetBuildingID, tempCurrentLevel
+				}
+
+			}
 
 			if lowsestPrice > OgameUtil.ResourcePricesSum(ogame.MetalMine.GetPrice(resbuildings.MetalMine)) {
 				targetPlanet = elm
