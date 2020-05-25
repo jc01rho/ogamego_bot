@@ -18,22 +18,24 @@ func (bot *OGameBot) MaintainLCCountStep(LCcount int64) {
 }
 
 //LCCount가 -1 이면 시간당 생산량에서 카대를 생산
-func (bot *OGameBot) MaintainLCCountStepSpecificPlanet(planet ogame.Planet, LCcount int64) {
+func (bot *OGameBot) MaintainLCCountStepSpecificPlanet(planet ogame.Planet, neededLCcount int64) {
 	log.Info("MaintainLCCountStep start")
 
 	elm := planet
 
-	Resss, _ := elm.GetResourcesProductions() //TODO : this function fecthes resss percent to crawl. consider that check minlevel and calc for production.
+	ResssProd, _ := elm.GetResourcesProductions() //TODO : this function fecthes resss percent to crawl. consider that check minlevel and calc for production.
+	RessCurrent, _ := elm.GetResources()
+
 
 	currentCap := OgameUtil.GetCapacityOfCurrentBotOfPlanetWithOnlyLC(bot.Ogamebot, elm.ID)
 	ToBuildLCCount := int64(1)
-	if Resss.Total()*24 > currentCap { //handle to take 24h productions
+	if ResssProd.Total()*36 > currentCap || RessCurrent.Total() > currentCap{ //handle to take 24h productions
 		//TODO: build LC more
-		if LCcount < 0 {
-			ToBuildLCCount = int64(math.Min(float64(Resss.Metal/ogame.LargeCargo.Price.Metal), float64(Resss.Crystal/ogame.LargeCargo.Price.Crystal)))
+		if neededLCcount < 0 {
+			ToBuildLCCount = int64(math.Min(float64(ResssProd.Metal/ogame.LargeCargo.Price.Metal), float64(ResssProd.Crystal/ogame.LargeCargo.Price.Crystal)))
 			ToBuildLCCount = int64(math.Max(float64(ToBuildLCCount), 1))
 		} else {
-			ToBuildLCCount = (LCcount)
+			ToBuildLCCount = (neededLCcount)
 		}
 
 		log.Info("%v Build LC %v", elm.Coordinate, ToBuildLCCount)
