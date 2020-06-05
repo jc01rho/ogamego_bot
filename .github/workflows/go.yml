@@ -47,6 +47,7 @@ jobs:
 
     - name: Build
       run: |
+        zip -r template.zip template/
         sed -i "s/var IsDevelopment = true/var IsDevelopment = false/g" Logger/Logger.go
         #for GOOSV in darwin linux; do
           #for GOARCHV in 386 amd64; do
@@ -93,7 +94,7 @@ jobs:
       with:
         files: |
           ./bin/ogame-bot*
-          template
+          template.zip
           updateApp.sh
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
