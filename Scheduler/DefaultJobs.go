@@ -35,7 +35,7 @@ func DefaultJobs() {
 	Scheduler.Every(1).Day().At("18:01").Do(Queue.JobQueue.Set, Queue.DefaultPriority, OGameBotRoutine.OGameBotGlobal.BuildNextRess)
 	Scheduler.Every(1).Day().At("20:01").Do(Queue.JobQueue.Set, Queue.DefaultPriority, OGameBotRoutine.OGameBotGlobal.BuildNextRess)
 	Scheduler.Every(1).Day().At("22:01").Do(Queue.JobQueue.Set, Queue.DefaultPriority, OGameBotRoutine.OGameBotGlobal.BuildNextRess)
-	Scheduler.Every(1).Day().At("24:01").Do(Queue.JobQueue.Set, Queue.DefaultPriority, OGameBotRoutine.OGameBotGlobal.BuildNextRess)
+	
 
 	//Scheduler.Every(2).Hours().From(gocron.NextTick()).Do(Queue.JobQueue.Set, Queue.CriticalPriority, HeaertBeat)
 
