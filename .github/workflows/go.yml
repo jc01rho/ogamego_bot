@@ -93,6 +93,7 @@ jobs:
       with:
         files: |
           ./bin/ogame-bot*
+          template
           updateApp.sh
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
