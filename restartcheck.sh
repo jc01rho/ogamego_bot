@@ -4,12 +4,7 @@ echo \"$1\"> universe
 echo $2 > username
 echo $3 > password
 echo $4 > language
-#lang en
-#port 27015
-#--api-new-hostname=http://304.198.117.29:27015
 echo $5 > hostnamevar
-
-
 
 
 if pgrep -x "ogamebot" > /dev/null
