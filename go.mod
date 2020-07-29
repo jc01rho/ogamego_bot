@@ -9,6 +9,7 @@ require (
 	github.com/jc01rho/gocron v0.0.0-20200317110215-1a3ca30ce0f3
 	github.com/labstack/echo v3.3.10+incompatible
 	github.com/labstack/gommon v0.3.0 // indirect
+	github.com/pquerna/otp v1.2.0 // indirect
 	github.com/sirupsen/logrus v1.4.2
 	github.com/slayer/autorestart v0.0.0-20170706172704-7bc8d250279b // indirect
 	github.com/valyala/fasttemplate v1.1.0 // indirect
