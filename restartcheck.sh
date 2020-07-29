@@ -24,8 +24,8 @@ else
     password=$(<password)
     language=$(language)
     hostname=$(hostname)
-    echo 'nohup ./ogamebot --universe="$universe" --username=$username --password=$password --language=$language --port=27015 --host=0.0.0.0 --api-new-hostname=$hostname &'
-    nohup ./ogamebot --universe=$universe --username="$username" --password=$password --language=$language --port=27015 --host=0.0.0.0 --api-new-hostname=$hostname &
+    echo 'nohup ./ogamebot --universe="${universe}" --username=${username} --password=${password} --language=${language} --port=27015 --host=0.0.0.0 --api-new-hostname={$hostname} &'
+    nohup ./ogamebot --universe="${universe}" --username=${username} --password=${password} --language=${language} --port=27015 --host=0.0.0.0 --api-new-hostname={$hostname} &
 fi
 
 
