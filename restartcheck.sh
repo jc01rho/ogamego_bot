@@ -12,7 +12,8 @@ echo $4 > hostname
 
 
 
-if pgrep ogamebot;then
+if pgrep -x "ogamebot" > /dev/null
+then
     echo "test"
 else
     git pull
