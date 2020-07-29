@@ -12,16 +12,16 @@ then
     echo "test"
 else
     git pull
-    ./updateApp.sh latest ogamebotNew;
-    mv ogamebotNew ogamebot;
+    #./updateApp.sh latest ogamebotNew;
+    #mv ogamebotNew ogamebot;
     universe=$(<universe)
     username=$(<username)
     password=$(<password)
     language=$(<language)
     hostnamevar=$(<hostnamevar)
-    echo nohup ./ogamebot --universe=${universe} --username=${username} --password=${password} --language=${language} --port=27015 --host=0.0.0.0 --api-new-hostname=${hostnamevar} &
-    sleep 2
-    nohup ./ogamebot --universe=${universe} --username=${username} --password=${password} --language=${language} --port=27015 --host=0.0.0.0 --api-new-hostname=${hostnamevar} &
+    echo ./ogamebot --universe=${universe} --username=${username} --password=${password} --language=${language} --port=27015 --host=0.0.0.0 --api-new-hostname=${hostnamevar} > temp.sh
+    nohup bash temp.sh &
+
 fi
 
 
