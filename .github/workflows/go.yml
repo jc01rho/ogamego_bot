@@ -34,7 +34,7 @@ jobs:
     - name: clone OGame Base
       env:
         SUPER_SECRET: ${{ secrets.BITBUCKETPASS }}
-      run: git clone https://jc01rho:SUPER_SECRET@bitbucket.org/jc01rho/ogame.git ../ogame
+      run: git clone https://jc01rho:$SUPER_SECRET@bitbucket.org/jc01rho/ogame.git ../ogame
       
     - name: Check out code into the Go module directory
       uses: actions/checkout@v2
