@@ -12,8 +12,8 @@ then
     echo "test"
 else
     git pull
-    #./updateApp.sh latest ogamebotNew;
-    #mv ogamebotNew ogamebot;
+    ./updateApp.sh latest ogamebotNew;
+    mv ogamebotNew ogamebot;
     universe=$(<universe)
     username=$(<username)
     password=$(<password)
