@@ -25,8 +25,9 @@ else
     language=$(<language)
     hostnamevar=$(<hostnamevar)
     echo nohup ./ogamebot --universe=${universe} --username=${username} --password=${password} --language=${language} --port=27015 --host=0.0.0.0 --api-new-hostname=${hostnamevar} &
+    sleep 2
     nohup ./ogamebot --universe=${universe} --username=${username} --password=${password} --language=${language} --port=27015 --host=0.0.0.0 --api-new-hostname=${hostnamevar} &
 fi
 
 
-#    jc85rho@instance-1:~/git/ogamego_bot$ nohup ./ogamebot --universe="Universe 1" --username=pku0369@naver.com --password=wjdals1234! --language=en --port=27015 --host=0.0.0.0 --api-new-hostname=http://304.198.117.29:27015 &
+#    jc85rho@instance-1:~/git/ogamego_bot$ nohup ./ogamebot --universe="Universe 1" --username=pku0369@naver.com --password=wjdals1234! --language=en --port=27015 --host=0.0.0.0 --api-new-hostname=http://104.198.117.29:27015 &
