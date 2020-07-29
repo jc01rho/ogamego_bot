@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo "$1"> universe
+echo \"$1\"> universe
 echo $2 > username
 echo $3 > password
 echo $3 > language
