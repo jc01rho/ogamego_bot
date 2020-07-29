@@ -3,11 +3,11 @@
 echo \"$1\"> universe
 echo $2 > username
 echo $3 > password
-echo $3 > language
+echo $4 > language
 #lang en
 #port 27015
 #--api-new-hostname=http://304.198.117.29:27015
-echo $4 > hostnamevar
+echo $5 > hostnamevar
 
 
 
@@ -24,8 +24,8 @@ else
     password=$(<password)
     language=$(language)
     hostnamevar=$(hostnamevar)
-    echo nohup ./ogamebot --universe=${universe} --username=${username} --password=${password} --language=${language} --port=27015 --host=0.0.0.0 --api-new-hostname={hostnamevar} &
-    nohup ./ogamebot --universe=${universe} --username=${username} --password=${password} --language=${language} --port=27015 --host=0.0.0.0 --api-new-hostname={hostnamevar} &
+    echo nohup ./ogamebot --universe=${universe} --username=${username} --password=${password} --language=${language} --port=27015 --host=0.0.0.0 --api-new-hostname=${hostnamevar} &
+    nohup ./ogamebot --universe=${universe} --username=${username} --password=${password} --language=${language} --port=27015 --host=0.0.0.0 --api-new-hostname=${hostnamevar} &
 fi
 
 
