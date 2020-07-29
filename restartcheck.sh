@@ -15,6 +15,7 @@ echo $4 > hostname
 if pgrep ogamebot;then
     echo "test"
 else
+    git pull
     updateApp.sh latest ogamebotNew;
     mv ogamebotNew ogamebot;
     universe=$(<universe)
