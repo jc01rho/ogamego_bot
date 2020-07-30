@@ -19,7 +19,7 @@ func (bot *OGameBot) BuildNextRess() {
 	if ogame.Objs.ByID(targetID) != nil && ogame.Objs.ByID(targetID).GetID().IsResourceBuilding() {
 
 		NeedsRess = targetObject.GetPrice(level)
-	} else if ogame.Objs.ByID(targetID).GetID().IsShip() && targetID == ogame.SolarSatelliteID {
+	} else if ogame.Objs.ByID(targetID) != nil && ogame.Objs.ByID(targetID).GetID().IsShip() && targetID == ogame.SolarSatelliteID {
 		NeedsRess = targetObject.GetPrice(level)
 	} else {
 		log.Error(targetID, "Wrong targetID ID ")
