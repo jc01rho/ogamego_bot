@@ -16,14 +16,14 @@ func (bot *OGameBot) BuildNextRess() {
 	CurrentRessInTargetPlanet, _ := bot.Ogamebot.GetResources(targetPlanet.GetID())
 	targetObject := ogame.Objs.ByID(targetID)
 	var NeedsRess ogame.Resources
-	if ogame.Objs.ByID(targetID).GetID().IsResourceBuilding() {
-
+	if ogame.Objs.ByID(targetID) != nil && ogame.Objs.ByID(targetID).GetID().IsResourceBuilding() {
 
 		NeedsRess = targetObject.GetPrice(level)
 	} else if ogame.Objs.ByID(targetID).GetID().IsShip() && targetID == ogame.SolarSatelliteID {
 		NeedsRess = targetObject.GetPrice(level)
+	} else {
+		log.Error(targetID, "Wrong targetID ID ")
 	}
-
 
 	//bot.Ogamebot.Abandon()
 
@@ -52,7 +52,7 @@ func (bot *OGameBot) BuildNextRess() {
 				log.Infof("%s Sleep %d secs and Build command will be added to queue", Logger.CurrentFileNameAndLine(), flightTime+30)
 				time.Sleep(time.Second*time.Duration(flightTime) + time.Second*30)
 				log.Infof(">>>>RessBuilding Lazy Built %s %s", targetPlanet.Coordinate.String(), targetObject.GetName())
-				Queue.JobQueue.Set(Queue.DefaultPriority, func() { OgameUtil.BuildTargetBuilding(bot.Ogamebot, targetPlanet.GetID(), targetObject,level) })
+				Queue.JobQueue.Set(Queue.DefaultPriority, func() { OgameUtil.BuildTargetBuilding(bot.Ogamebot, targetPlanet.GetID(), targetObject, level) })
 				bot.BuildRessSkipList.Remove(targetPlanet)
 
 			}()
@@ -67,7 +67,7 @@ func (bot *OGameBot) BuildNextRess() {
 
 	} else {
 
-		OgameUtil.BuildTargetBuilding(bot.Ogamebot, targetPlanet.GetID(), targetObject,level)
+		OgameUtil.BuildTargetBuilding(bot.Ogamebot, targetPlanet.GetID(), targetObject, level)
 		log.Info("RessBuilding Immdiately Built")
 		bot.BuildRessSkipList.Remove(targetPlanet)
 	}
