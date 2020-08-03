@@ -24,12 +24,14 @@ func DefaultJobs() {
 
 	//Scheduler.Every(1).Second().Do(Queue.JobQueue.Set, Queue.DefaultPriority, OGameBotRoutine.OGameBotGlobal.Ogamebot.IsUnderAttack)
 
-	Scheduler.Every(90).Minutes().From(gocron.NextTick()).Do(Queue.JobQueue.Set, Queue.DefaultPriority, OGameBotRoutine.OGameBotGlobal.MaintainLCCountStep, int64(-1))
 
+
+	//Scheduler.Every(90).Minutes().From(gocron.NextTick()).Do(Queue.JobQueue.Set, Queue.DefaultPriority, OGameBotRoutine.OGameBotGlobal.MaintainLCCountStep, int64(-1))
 
 	Scheduler.Every(1).Day().At("08:00").Do(Queue.JobQueue.Set, Queue.CriticalPriority, OGameBotRoutine.RestartLogic)
+	Scheduler.Every(1).Day().From(gocron.NextTick()).Do(Queue.JobQueue.Set, Queue.DefaultPriority, OGameBotRoutine.OGameBotGlobal.BuildNextRess)
 
-	Scheduler.Every(1).Day().At("08:01").Do(Queue.JobQueue.Set, Queue.DefaultPriority, OGameBotRoutine.OGameBotGlobal.BuildNextRess)
+	//Scheduler.Every(1).Day().At("08:01").Do(Queue.JobQueue.Set, Queue.DefaultPriority, OGameBotRoutine.OGameBotGlobal.BuildNextRess)
 	Scheduler.Every(1).Day().At("12:01").Do(Queue.JobQueue.Set, Queue.DefaultPriority, OGameBotRoutine.OGameBotGlobal.BuildNextRess)
 	Scheduler.Every(1).Day().At("16:01").Do(Queue.JobQueue.Set, Queue.DefaultPriority, OGameBotRoutine.OGameBotGlobal.BuildNextRess)
 	Scheduler.Every(1).Day().At("18:01").Do(Queue.JobQueue.Set, Queue.DefaultPriority, OGameBotRoutine.OGameBotGlobal.BuildNextRess)
@@ -42,6 +44,7 @@ func DefaultJobs() {
 
 
 	Scheduler.Every(1).Day().At("08:05").Do(Queue.JobQueue.Set, Queue.DefaultPriority, OGameBotRoutine.OGameBotGlobal.CollectRessRoutine)
+	Scheduler.Every(90).Minutes().At("08:05").Do(Queue.JobQueue.Set, Queue.DefaultPriority, OGameBotRoutine.OGameBotGlobal.MaintainLCCountStep, int64(-1))
 
 	go func() {
 		for {
