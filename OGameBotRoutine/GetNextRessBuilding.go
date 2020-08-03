@@ -21,12 +21,20 @@ func (bot *OGameBot) GetNextResBuilding() (*ogame.Planet, ogame.ID, int64) {
 
 	for _, elm := range planets {
 
+		fields := elm.GetFields()
+
+		if  (fields.Total-fields.Built == 0) {
+			log.Info("not enought field skip")
+			continue
+		}
+
+
 		if bot.BuildRessSkipList.Contains(elm) {
 			continue
 		}
 		a, b, _, _ := elm.ConstructionsBeingBuilt()
 		if a != 0 && b != 0 {
-			log.Info("GetNextResBuilding start")
+
 			bot.BuildRessSkipList.Add(elm)
 			continue
 		} else {
