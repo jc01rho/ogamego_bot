@@ -190,6 +190,19 @@ func main() {
 			Value:   true,
 			EnvVars: []string{"CORS_ENABLED"},
 		},
+		&cli.StringFlag{
+			Name:    "main-coords",
+			Usage:   "Main coords",
+			Value:   "",
+			EnvVars: []string{"MAIN_COORDS"},
+		},
+		&cli.BoolFlag{
+			Name:    "expedtiion-mode",
+			Usage:   "Expedition mode",
+			Value:   true,
+			EnvVars: []string{"EXPEDITION_MODE"},
+		},
+
 	}
 	app.Action = start
 	if err := app.Run(os.Args); err != nil {
@@ -249,7 +262,7 @@ func start(c *cli.Context) error {
 		return err
 	}
 
-	Global.InitEssentials(bot)
+	Global.InitEssentials(bot,c)
 	bot.Quiet(true)
 
 	e := echo.New()
