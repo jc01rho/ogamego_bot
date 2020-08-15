@@ -19,8 +19,6 @@ func (bot *OGameBot) GetNextFacilityInBuildRess(planet ogame.Planet) (bool, ogam
 		return true, planet, ogame.RoboticsFactoryID, facilities.RoboticsFactory
 	} else if facilities.Shipyard < 7 {
 		return true, planet, ogame.ShipyardID, facilities.Shipyard
-	} else if facilities.MissileSilo < 4 {
-		return true, planet, ogame.MissileSiloID, facilities.MissileSilo
 	} else {
 		//fail fall
 		return false, planet, ogame.ShipyardID, facilities.Shipyard
