@@ -2,6 +2,7 @@ package OGameBotRoutine
 
 import (
 	"bitbucket.org/jc01rho/ogame"
+	log "github.com/sirupsen/logrus"
 )
 
 func (bot *OGameBot) DetermineMainPlanet() {
@@ -53,5 +54,7 @@ func (bot *OGameBot) DetermineMainPlanet() {
 		}
 
 	}
+	//log.Info(elm.Coordinate, bot.MainPlanetCoord, "is diff")
+	log.Info("Main coords is", bot.MainPlanetCoord)
 
 }
