@@ -8,18 +8,20 @@ import (
 var OGameBotGlobal OGameBot
 
 type OGameBot struct {
-	Ogamebot              *ogame.OGame
-	MainPlanetCoord       ogame.Coordinate
-	MainCelestitial ogame.Celestial
-	MainPlanetCelestitial			  ogame.Celestial
+	Ogamebot                  *ogame.OGame
+	MainPlanetCoord           ogame.Coordinate
+	MainCelestitial           ogame.Celestial
+	MainPlanetCelestitial     ogame.Celestial
 	MainPlanetMoonCelestitial ogame.Celestial
 
-
-	IsMainPlanetMoon      bool
+	IsMainPlanetMoon bool
 
 	Class ogame.CharacterClass
 
 	BuildRessSkipList sets.Set
+
+	IsExpeditionMode bool
+	MainCoords       *ogame.Coordinate
 
 	Universe string
 	Username string
