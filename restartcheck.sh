@@ -6,6 +6,11 @@ echo $3 > password
 echo $4 > language
 echo $5 > hostnamevar
 
+if [ $# -eq 6 ]
+then
+echo $6 > maincoords
+fi
+
 
 if pgrep -x "ogamebot" > /dev/null
 then
@@ -19,7 +24,15 @@ else
     password=$(<password)
     language=$(<language)
     hostnamevar=$(<hostnamevar)
+    if [ $# -eq 6 ]
+    then
+    maincoords=$(<maincoords)
+    echo ./ogamebot --universe=${universe} --username=${username} --password=${password} --language=${language} --port=27015 --host=0.0.0.0 --api-new-hostname=${hostnamevar} --main-coords=${maincoords} > temp.sh
+    else
     echo ./ogamebot --universe=${universe} --username=${username} --password=${password} --language=${language} --port=27015 --host=0.0.0.0 --api-new-hostname=${hostnamevar} > temp.sh
+    fi
+
+
     nohup bash temp.sh &
 
 fi
