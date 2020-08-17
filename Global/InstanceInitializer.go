@@ -29,10 +29,11 @@ func InitEssentials(bot *ogame.OGame, c *cli.Context) {
 		tempMainCoords.Type = ogame.CelestialType(typeTmp)
 		OGameBotRoutine.OGameBotGlobal.MainCoords = tempMainCoords
 
-		OGameBotRoutine.OGameBotGlobal.Class = OGameBotRoutine.OGameBotGlobal.Ogamebot.CharacterClass()
-		OGameBotRoutine.OGameBotGlobal.DetermineMainPlanet()
-		OGameBotRoutine.OGameBotGlobal.BuildRessSkipList = hashset.New()
+
 	}
+	OGameBotRoutine.OGameBotGlobal.Class = OGameBotRoutine.OGameBotGlobal.Ogamebot.CharacterClass()
+	OGameBotRoutine.OGameBotGlobal.DetermineMainPlanet()
+	OGameBotRoutine.OGameBotGlobal.BuildRessSkipList = hashset.New()
 
 	Queue.InitQueue()
 	//Bot.InitBot()
