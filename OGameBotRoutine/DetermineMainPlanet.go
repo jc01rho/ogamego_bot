@@ -2,12 +2,11 @@ package OGameBotRoutine
 
 import (
 	"bitbucket.org/jc01rho/ogame"
-	"github.com/jc01rho/ogamego_bot/Global"
 )
 
 func (bot *OGameBot) DetermineMainPlanet() {
 
-	if Global.MainCoords == nil {
+	if MainCoords == nil {
 		planets := bot.Ogamebot.GetCachedPlanets()
 		var lowsestID *ogame.Planet = nil
 		var coordness ogame.Coordinate
@@ -39,7 +38,7 @@ func (bot *OGameBot) DetermineMainPlanet() {
 		bot.IsMainPlanetMoon = false
 
 	} else {
-		bot.MainPlanetCoord = *Global.MainCoords
+		bot.MainPlanetCoord = *MainCoords
 
 		planets := bot.Ogamebot.GetCachedPlanets()
 		for _, elm := range planets {
