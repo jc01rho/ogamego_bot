@@ -261,7 +261,7 @@ func start(c *cli.Context) error {
 		return err
 	}
 
-	Global.InitEssentials(bot)
+	Global.InitEssentials(bot, c)
 	bot.Quiet(true)
 
 	e := echo.New()
