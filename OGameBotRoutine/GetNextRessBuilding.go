@@ -23,11 +23,13 @@ func (bot *OGameBot) GetNextResBuilding() (*ogame.Planet, ogame.ID, int64) {
 
 		fields := elm.GetFields()
 
-		if  (fields.Total-fields.Built == 0) {
+		//log.Info("remaing of ", fromCelestitial.GetCoordinate(), " is ", currentRess)
+		log.Info(elm.GetCoordinate(), "current fields : ", fields.Built, "/", fields.Total)
+
+		if fields.Total-fields.Built == 0 {
 			log.Info("not enought field skip")
 			continue
 		}
-
 
 		if bot.BuildRessSkipList.Contains(elm) {
 			continue
