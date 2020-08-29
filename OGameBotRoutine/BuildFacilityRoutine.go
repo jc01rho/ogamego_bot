@@ -8,6 +8,7 @@ func (bot *OGameBot) GetNextFacilityInBuildRess(planet ogame.Planet) (bool, ogam
 	//lowsestPrice = OgameUtil.ResourcePricesSum(ogame.MetalMine.GetPrice(resbuildings.MetalMine))
 	//currentLevel = resbuildings.MetalMine
 	facilities, _ := planet.GetFacilities()
+	researches := bot.Ogamebot.GetResearch()
 
 	if facilities.RoboticsFactory < 2 {
 		return true, planet, ogame.RoboticsFactoryID, facilities.RoboticsFactory
@@ -19,6 +20,10 @@ func (bot *OGameBot) GetNextFacilityInBuildRess(planet ogame.Planet) (bool, ogam
 		return true, planet, ogame.RoboticsFactoryID, facilities.RoboticsFactory
 	} else if facilities.Shipyard < 7 {
 		return true, planet, ogame.ShipyardID, facilities.Shipyard
+	} else if facilities.RoboticsFactory < 10 {
+		return true, planet, ogame.RoboticsFactoryID, facilities.RoboticsFactory
+	} else if facilities.NaniteFactory < 5 && researches.ComputerTechnology >= 10 {
+		return true, planet, ogame.RoboticsFactoryID, facilities.RoboticsFactory
 	} else {
 		//fail fall
 		return false, planet, ogame.ShipyardID, facilities.Shipyard
