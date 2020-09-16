@@ -47,11 +47,15 @@ func (bot *OGameBot) GetNextResBuilding() (*ogame.Planet, ogame.ID, int64) {
 			continue
 		}
 
+		productions, _ := elm.GetResourcesProductions()
+
 		resbuildings, _ := elm.GetResourcesBuildings()
 		resbuildings.CrystalMine++
 		resbuildings.DeuteriumSynthesizer++
 		resbuildings.MetalMine++
 		energy, _ := elm.GetResources()
+
+		_ = productions
 
 		if energy.Energy < 0 && resbuildings.SolarPlant < 22 {
 
