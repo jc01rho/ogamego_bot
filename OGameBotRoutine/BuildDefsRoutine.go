@@ -18,17 +18,17 @@ func (bot *OGameBot) BuildDefs() {
 
 			resbuildings, _ := elm.GetResourcesBuildings()
 			if resbuildings.MetalMine > 15 {
-				_ = elm.BuildDefense(ogame.RocketLauncherID, 2)
+				_ = elm.BuildDefense(ogame.RocketLauncherID, 3)
 			}
 			if resbuildings.MetalMine > 20 {
-				_ = elm.BuildDefense(ogame.RocketLauncherID, 3)
+				_ = elm.BuildDefense(ogame.RocketLauncherID, 5)
 
 				if resbuildings.CrystalMine > 10 {
-					_ = elm.BuildDefense(ogame.LightLaserID, 1)
+					_ = elm.BuildDefense(ogame.LightLaserID, 2)
 				}
 
 				if resbuildings.CrystalMine > 20 {
-					_ = elm.BuildDefense(ogame.LightLaserID, 3)
+					_ = elm.BuildDefense(ogame.LightLaserID, 5)
 				}
 
 				if resbuildings.DeuteriumSynthesizer > 15 {
