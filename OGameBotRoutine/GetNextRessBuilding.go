@@ -52,6 +52,16 @@ func (bot *OGameBot) GetNextResBuilding() (*ogame.Planet, ogame.ID, int64) {
 
 		details, _ := elm.GetResourcesDetails()
 		resbuildings, _ := elm.GetResourcesBuildings()
+
+		settings.MetalMine = 100
+		settings.CrystalMine = 100
+		settings.DeuteriumSynthesizer = 100
+		settings.SolarPlant = 100
+		settings.Crawler = 100
+		settings.SolarSatellite = 100
+		_ = bot.Ogamebot.SetResourceSettings(ogame.PlanetID(elm.GetID()), settings)
+
+		//bot.Ogamebot.SetResourceSettings()
 		resbuildings.CrystalMine++
 		resbuildings.DeuteriumSynthesizer++
 		resbuildings.MetalMine++
