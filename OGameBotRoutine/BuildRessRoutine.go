@@ -16,6 +16,7 @@ func (bot *OGameBot) BuildNextRess() {
 	CurrentRessInTargetPlanet, _ := bot.Ogamebot.GetResources(targetPlanet.GetID())
 	targetObject := ogame.Objs.ByID(targetID)
 	var NeedsRess ogame.Resources
+
 	if ogame.Objs.ByID(targetID) != nil && ogame.Objs.ByID(targetID).GetID().IsResourceBuilding() {
 
 		NeedsRess = targetObject.GetPrice(level)
@@ -25,6 +26,8 @@ func (bot *OGameBot) BuildNextRess() {
 		log.Error(targetID, "Wrong targetID ID ")
 		//return
 	}
+
+	NeedsRess = targetObject.GetPrice(level)
 
 	//bot.Ogamebot.Abandon()
 
