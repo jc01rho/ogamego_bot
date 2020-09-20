@@ -23,7 +23,7 @@ func (bot *OGameBot) BuildNextRess() {
 		NeedsRess = targetObject.GetPrice(level)
 	} else {
 		log.Error(targetID, "Wrong targetID ID ")
-		return
+		//return
 	}
 
 	//bot.Ogamebot.Abandon()
