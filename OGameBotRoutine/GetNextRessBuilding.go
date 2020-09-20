@@ -48,16 +48,19 @@ func (bot *OGameBot) GetNextResBuilding() (*ogame.Planet, ogame.ID, int64) {
 		}
 
 		productions, _ := elm.GetResourcesProductions()
+		settings, _ := elm.GetResourceSettings()
 
+		details, _ := elm.GetResourcesDetails()
 		resbuildings, _ := elm.GetResourcesBuildings()
 		resbuildings.CrystalMine++
 		resbuildings.DeuteriumSynthesizer++
 		resbuildings.MetalMine++
-		energy, _ := elm.GetResources()
 
 		_ = productions
+		_ = settings
+		_ = details
 
-		if energy.Energy < 0 && resbuildings.SolarPlant < 22 {
+		if details.Energy.Available < 0 && resbuildings.SolarPlant < 22 {
 
 			targetPlanet = elm
 			targetBuilding = ogame.SolarPlant.Base
@@ -65,7 +68,7 @@ func (bot *OGameBot) GetNextResBuilding() (*ogame.Planet, ogame.ID, int64) {
 
 			return &targetPlanet, targetBuilding.ID, currentLevel
 
-		} else if energy.Energy < 0 {
+		} else if details.Energy.Available < 0 {
 
 			builtList, reaminingTime, _ := elm.GetProduction()
 			if len(builtList) > 0 {
@@ -110,6 +113,20 @@ func (bot *OGameBot) GetNextResBuilding() (*ogame.Planet, ogame.ID, int64) {
 					return &tempTargetPlanet, tempTargetBuildingID, tempCurrentLevel
 				}
 
+			}
+
+			if details.Metal.StorageCapacity < productions.Metal*32 {
+				targetPlanet = elm
+				targetBuilding = ogame.MetalStorage.Base
+				lowsestPrice = OgameUtil.ResourcePricesSum(ogame.MetalStorage.GetPrice(resbuildings.MetalStorage))
+			} else if details.Crystal.StorageCapacity < productions.Crystal*32 {
+				targetPlanet = elm
+				targetBuilding = ogame.CrystalStorage.Base
+				lowsestPrice = OgameUtil.ResourcePricesSum(ogame.CrystalStorage.GetPrice(resbuildings.CrystalStorage))
+			} else if details.Deuterium.StorageCapacity < productions.Deuterium*32 {
+				targetPlanet = elm
+				targetBuilding = ogame.DeuteriumTank.Base
+				lowsestPrice = OgameUtil.ResourcePricesSum(ogame.DeuteriumTank.GetPrice(resbuildings.DeuteriumTank))
 			}
 
 			if lowsestPrice > OgameUtil.ResourcePricesSum(ogame.MetalMine.GetPrice(resbuildings.MetalMine)) {

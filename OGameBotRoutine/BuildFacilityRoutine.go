@@ -18,11 +18,11 @@ func (bot *OGameBot) GetNextFacilityInBuildRess(planet ogame.Planet) (bool, ogam
 		return true, planet, ogame.ShipyardID, facilities.Shipyard
 	} else if facilities.RoboticsFactory < 7 {
 		return true, planet, ogame.RoboticsFactoryID, facilities.RoboticsFactory
-	} else if facilities.Shipyard < 7 {
+	} else if facilities.Shipyard < 9 {
 		return true, planet, ogame.ShipyardID, facilities.Shipyard
 	} else if facilities.RoboticsFactory < 10 {
 		return true, planet, ogame.RoboticsFactoryID, facilities.RoboticsFactory
-	} else if facilities.NaniteFactory < 5 && researches.ComputerTechnology >= 10 {
+	} else if facilities.NaniteFactory < 2 && researches.ComputerTechnology >= 10 {
 		return true, planet, ogame.RoboticsFactoryID, facilities.RoboticsFactory
 	} else {
 		//fail fall
