@@ -17,15 +17,15 @@ func (bot *OGameBot) BuildNextRess() {
 	targetObject := ogame.Objs.ByID(targetID)
 	var NeedsRess ogame.Resources
 
-	if ogame.Objs.ByID(targetID) != nil && ogame.Objs.ByID(targetID).GetID().IsResourceBuilding() {
-
-		NeedsRess = targetObject.GetPrice(level)
-	} else if ogame.Objs.ByID(targetID) != nil && ogame.Objs.ByID(targetID).GetID().IsShip() && targetID == ogame.SolarSatelliteID {
-		NeedsRess = targetObject.GetPrice(level)
-	} else {
-		log.Error(targetID, "Wrong targetID ID ")
-		//return
-	}
+	//if ogame.Objs.ByID(targetID) != nil && ogame.Objs.ByID(targetID).GetID().IsResourceBuilding() {
+	//
+	//	NeedsRess = targetObject.GetPrice(level)
+	//} else if ogame.Objs.ByID(targetID) != nil && ogame.Objs.ByID(targetID).GetID().IsShip() && targetID == ogame.SolarSatelliteID {
+	//	NeedsRess = targetObject.GetPrice(level)
+	//} else {
+	//	log.Error(targetID, "Wrong targetID ID ")
+	//	//return
+	//}
 
 	NeedsRess = targetObject.GetPrice(level)
 
