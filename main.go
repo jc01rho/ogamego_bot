@@ -407,6 +407,7 @@ func start(c *cli.Context) error {
 	}
 	log.Println("Disable TLS Support")
 	log.Info("logged in as " + bot.GetUsername() + " (" + bot.GetUserInfos().PlayerName + ") on " + bot.GetUniverseName() + "-" + bot.GetLanguage())
+
 	return e.Start(host + ":" + strconv.Itoa(port))
 }
 
