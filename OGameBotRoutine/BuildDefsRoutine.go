@@ -11,12 +11,20 @@ func (bot *OGameBot) BuildDefs() {
 
 	planets := bot.Ogamebot.GetCachedPlanets()
 	for _, elm := range planets {
-		productions, _, _ := elm.GetProduction()
-		if len(productions) > 5 {
+		productions, _, errors := elm.GetProduction()
+		if errors != nil {
+			continue
+		}
+
+		if len(productions) > 7 {
+			log.Info("productions leng over7, skipped")
 			continue
 		} else {
-
-			resbuildings, _ := elm.GetResourcesBuildings()
+			log.Info("productions onging...")
+			resbuildings, err := elm.GetResourcesBuildings()
+			if err != nil {
+				continue
+			}
 
 			if resbuildings.DeuteriumSynthesizer > 15 {
 				_ = elm.BuildDefense(ogame.GaussCannonID, 2)
@@ -26,19 +34,19 @@ func (bot *OGameBot) BuildDefs() {
 				_ = elm.BuildDefense(ogame.PlasmaTurretID, 1)
 			}
 
+			if resbuildings.CrystalMine > 10 {
+				_ = elm.BuildDefense(ogame.LightLaserID, 5)
+			}
+
+			if resbuildings.CrystalMine > 20 {
+				_ = elm.BuildDefense(ogame.LightLaserID, 4)
+			}
+
 			if resbuildings.MetalMine > 15 {
-				_ = elm.BuildDefense(ogame.RocketLauncherID, 7)
+				_ = elm.BuildDefense(ogame.RocketLauncherID, 3)
 			}
 			if resbuildings.MetalMine > 20 {
-				_ = elm.BuildDefense(ogame.RocketLauncherID, 11)
-
-				if resbuildings.CrystalMine > 10 {
-					_ = elm.BuildDefense(ogame.LightLaserID, 5)
-				}
-
-				if resbuildings.CrystalMine > 20 {
-					_ = elm.BuildDefense(ogame.LightLaserID, 4)
-				}
+				_ = elm.BuildDefense(ogame.RocketLauncherID, 5)
 
 			}
 
