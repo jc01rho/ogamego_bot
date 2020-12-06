@@ -1,0 +1,1 @@
+./ogamebot --universe=vega --username=rkjnice@gmail.com --password=!!AAaa132537 --language=en --port=27015 --host=0.0.0.0 --api-new-hostname=localhost --main-coords=1:34:12:1

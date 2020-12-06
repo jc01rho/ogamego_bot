@@ -1,12 +1,14 @@
 package OGameBotRoutine
 
-func (bot *OGameBot) DoResearchForColonyShip() {
+import "bitbucket.org/jc01rho/ogame"
+
+func (bot *OGameBot) DoResearchForColonyShip() (bool, ogame.ID, int64) {
 
 	researches := bot.Ogamebot.GetCachedResearch()
 	researchesFinishat := bot.Ogamebot.GetResearchFinishAt()
 
 	if researchesFinishat > 0 {
-		return
+		return false, -1, 0
 	}
 
 	print("test")
@@ -14,16 +16,22 @@ func (bot *OGameBot) DoResearchForColonyShip() {
 	_ = researchesFinishat
 
 	if researches.EnergyTechnology < 1 {
+		return true, ogame.EnergyTechnologyID, researches.EnergyTechnology
 
 	} else if researches.CombustionDrive < 2 {
+		return true, ogame.CombustionDriveID, researches.CombustionDrive
 
 	} else if researches.EspionageTechnology < 4 {
+		return true, ogame.EspionageTechnologyID, researches.EspionageTechnology
 
 	} else if researches.CombustionDrive < 3 {
+		return true, ogame.CombustionDriveID, researches.CombustionDrive
 
 	} else if researches.ImpulseDrive < 3 {
+		return true, ogame.ImpulseDriveID, researches.ImpulseDrive
 
 	} else if researches.Astrophysics < 1 {
+		return true, ogame.AstrophysicsID, researches.Astrophysics
 
 	}
 
@@ -64,6 +72,8 @@ func (bot *OGameBot) DoResearchForColonyShip() {
 	//elif self.researchList['astrophysics'] < 1:
 	//self.logger.info("research astrophysics from  " + str(self.researchList['astrophysics']))
 	//self.OGame.build(self.Settings['collect']['main']['target']['id'], Research['Astrophysics'])
+
+	return false, -1, 0
 }
 
 func (bot *OGameBot) DoResearch() {

@@ -1,6 +1,7 @@
 package Scheduler
 
 import (
+	"github.com/jc01rho/gocron"
 	"github.com/jc01rho/ogamego_bot/OGameBotRoutine"
 	"github.com/jc01rho/ogamego_bot/Queue"
 	log "github.com/sirupsen/logrus"
@@ -12,6 +13,9 @@ func HeaertBeat() {
 }
 
 func DefaultJobs() {
+	//	//Scheduler.Every(2).Hours().From(gocron.NextTick()).Do(Queue.JobQueue.Set, Queue.CriticalPriority, HeaertBeat)
+	Scheduler.Every(10).Seconds().From(gocron.NextTick()).Do(Queue.JobQueue.Set, Queue.DefaultPriority, OGameBotRoutine.OGameBotGlobal.BuildNextRess)
+
 	//Scheduler.Every(1).Day().At("08:01").Do(Queue.JobQueue.Set, Queue.DefaultPriority, OGameBotRoutine.OGameBotGlobal.BuildNextRess)
 
 	Scheduler.Every(1).Day().At("08:00").Do(Queue.JobQueue.Set, Queue.CriticalPriority, OGameBotRoutine.RestartLogic)

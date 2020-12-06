@@ -29,11 +29,15 @@ func (bot *OGameBot) DetermineMainPlanet() {
 			}
 		}
 		bot.MainPlanetCoord = coordness
-		bot.MainPlanetCelestitial = lowsestID
+		log.Info("Default selection logic  answers : ", bot.MainCoords)
+		//bot.MainPlanetCelestitial = lowsestID
+		bot.SetMainCelestial(lowsestID)
 		if lowsestID != nil && lowsestID.Moon != nil {
-			bot.MainPlanetMoonCelestitial = lowsestID.Moon
+			//TODO: 달이 있다면?
+			bot.SetMainCelestial(lowsestID)
 		} else {
-			bot.MainPlanetMoonCelestitial = nil
+
+			bot.SetMainCelestial(lowsestID)
 		}
 
 		bot.IsMainPlanetMoon = false
@@ -42,14 +46,27 @@ func (bot *OGameBot) DetermineMainPlanet() {
 		bot.MainPlanetCoord = *OGameBotGlobal.MainCoords
 
 		planets := bot.Ogamebot.GetCachedPlanets()
+		isExist := false
 		for _, elm := range planets {
 			tempElm := elm
 			if tempElm.GetCoordinate().Equal(bot.MainPlanetCoord) {
-				bot.MainPlanetCelestitial = tempElm
+				bot.SetMainCelestial(tempElm)
+				isExist = true
+
+
 			}
 			if bot.MainPlanetCoord.IsMoon() {
 				bot.IsMainPlanetMoon = true
+				bot.SetMainCelestial(tempElm.Moon)
+				isExist = true
 			}
+
+		}
+
+		if isExist == false {
+			OGameBotGlobal.MainCoords = nil
+			log.Info("Given default coords is Null, setting to default selection logic")
+			bot.DetermineMainPlanet()
 
 		}
 

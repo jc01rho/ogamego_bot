@@ -28,3 +28,9 @@ type OGameBot struct {
 	Password string
 	Language string
 }
+
+
+func (bot *OGameBot) SetMainCelestial( celestial ogame.Celestial) {
+	bot.MainCelestitial = celestial
+	OGameBotGlobal.MainCelestitial = celestial
+}
