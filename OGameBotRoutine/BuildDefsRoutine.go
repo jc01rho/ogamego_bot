@@ -20,7 +20,7 @@ func (bot *OGameBot) BuildDefs() {
 			log.Info("productions leng over7, skipped")
 			continue
 		} else {
-			log.Info("productions onging...")
+			log.Info("build defs inner routine start...")
 			resbuildings, err := elm.GetResourcesBuildings()
 			if err != nil {
 				continue
