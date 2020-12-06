@@ -48,18 +48,21 @@ func (bot *OGameBot) BuildNextRess() {
 		if CurrentRessInTargetPlanet.Add(RessinMainPlanet).CanAfford(NeedsRess) {
 
 			log.Infof("%s Sending ress from Main[%s] to %s", Logger.CurrentFileNameAndLine(), bot.MainPlanetCoord, targetPlanet.Coordinate)
-			bot.SendRessRoutineFromCelestitial(bot.MainPlanetCelestitial, NeedsRess.Sub(CurrentRessInTargetPlanet), targetPlanet.Coordinate)
-			flightTime, _ := bot.Ogamebot.FlightTime(bot.MainPlanetCelestitial.GetCoordinate(), targetPlanet.Coordinate, ogame.HundredPercent, ogame.ShipsInfos{LargeCargo: 1})
+			isSuccesful := bot.SendRessRoutineFromCelestitial(bot.MainPlanetCelestitial, NeedsRess.Sub(CurrentRessInTargetPlanet), targetPlanet.Coordinate)
+			if isSuccesful {
+				flightTime, _ := bot.Ogamebot.FlightTime(bot.MainPlanetCelestitial.GetCoordinate(), targetPlanet.Coordinate, ogame.HundredPercent, ogame.ShipsInfos{LargeCargo: 1})
 
-			go func() {
-				//TODO : 지연 빌드 혹은 지연 큐 삽입 테스트 필요
-				log.Infof("%s Sleep %d secs and Build command will be added to queue", Logger.CurrentFileNameAndLine(), flightTime+30)
-				time.Sleep(time.Second*time.Duration(flightTime) + time.Second*30)
-				log.Infof(">>>>RessBuilding Lazy Built %s %s", targetPlanet.Coordinate.String(), targetObject.GetName())
-				Queue.JobQueue.Set(Queue.DefaultPriority, func() { OgameUtil.BuildTargetBuilding(bot.Ogamebot, targetPlanet.GetID(), targetObject, level) })
-				bot.BuildRessSkipList.Remove(targetPlanet)
+				go func() {
+					//TODO : 지연 빌드 혹은 지연 큐 삽입 테스트 필요
+					log.Infof("%s Sleep %d secs and Build command will be added to queue", Logger.CurrentFileNameAndLine(), flightTime+30)
+					time.Sleep(time.Second*time.Duration(flightTime) + time.Second*30)
+					log.Infof(">>>>RessBuilding Lazy Built %s %s", targetPlanet.Coordinate.String(), targetObject.GetName())
+					Queue.JobQueue.Set(Queue.DefaultPriority, func() { OgameUtil.BuildTargetBuilding(bot.Ogamebot, targetPlanet.GetID(), targetObject, level) })
+					bot.BuildRessSkipList.Remove(targetPlanet)
 
-			}()
+				}()
+			}
+
 
 		} else {
 			log.Info("Not Enough Ress Altough sumed with main, abort build")
