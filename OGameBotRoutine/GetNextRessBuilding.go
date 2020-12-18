@@ -11,6 +11,10 @@ import (
 )
 
 func (bot *OGameBot) GetNextResBuilding() (*ogame.Planet, ogame.ID, int64) {
+	s1 := rand.NewSource(time.Now().UnixNano())
+	random := rand.New(s1)
+
+
 
 	planets := bot.Ogamebot.GetCachedPlanets()
 	var targetPlanet ogame.Planet
@@ -18,6 +22,50 @@ func (bot *OGameBot) GetNextResBuilding() (*ogame.Planet, ogame.ID, int64) {
 	var lowsestPrice int64 = math.MaxInt64
 
 	var currentLevel int64 = -1
+
+
+	///행성별 반복문이니 조심,
+
+
+
+
+
+
+
+	mainPlanet,err := bot.Ogamebot.GetPlanet(ogame.PlanetID(bot.MainCelestitial.GetID()))
+
+	if  err != nil {
+		log.Info("get planet err")
+	}
+
+	if mainPlanet.GetID() > 0{
+		resbuildingMain , _ :=  mainPlanet.GetResourcesBuildings()
+
+		//&& random.Intn(100) > 100-25
+		if resbuildingMain.DeuteriumSynthesizer > 7  {
+			isAvailable, resID, resLevel := bot.DoResearchForColonyShip()
+			if isAvailable {
+
+
+
+
+				return &mainPlanet, resID, resLevel
+			}
+		}
+	}
+
+
+
+	//if resbuildings.DeuteriumSynthesizer > 7 && random.Intn(100) > 75{
+	//	isAvailable, resID := bot.DoResearchForColonyShip()
+	//	if isAvailable {
+	//
+	//
+	//
+	//	}
+	//
+	//
+	//}
 
 	for _, elm := range planets {
 
@@ -102,28 +150,31 @@ func (bot *OGameBot) GetNextResBuilding() (*ogame.Planet, ogame.ID, int64) {
 			}
 
 		} else {
-			s1 := rand.NewSource(time.Now().UnixNano())
-			random := rand.New(s1)
 
-			if resbuildings.DeuteriumSynthesizer > 18 && random.Intn(100) > 100-30 {
+
+
+			if resbuildings.DeuteriumSynthesizer > 20 && random.Intn(100) > 100-30 {
 				result, tempTargetPlanet, tempTargetBuildingID, tempCurrentLevel := bot.GetNextFacilityInBuildRess(elm)
 				if result {
 					return &tempTargetPlanet, tempTargetBuildingID, tempCurrentLevel
 				}
 
-			} else if resbuildings.DeuteriumSynthesizer > 12 && random.Intn(100) > 100-25 {
+			} else if resbuildings.DeuteriumSynthesizer > 16 && random.Intn(100) > 100-25 {
 				result, tempTargetPlanet, tempTargetBuildingID, tempCurrentLevel := bot.GetNextFacilityInBuildRess(elm)
 				if result {
 					return &tempTargetPlanet, tempTargetBuildingID, tempCurrentLevel
 				}
 
-			} else if resbuildings.DeuteriumSynthesizer > 6 && random.Intn(100) > 100-20 {
+			} else if resbuildings.DeuteriumSynthesizer > 12 && random.Intn(100) > 100-20 {
 				result, tempTargetPlanet, tempTargetBuildingID, tempCurrentLevel := bot.GetNextFacilityInBuildRess(elm)
 				if result {
 					return &tempTargetPlanet, tempTargetBuildingID, tempCurrentLevel
 				}
 
 			}
+
+
+
 
 			if details.Metal.StorageCapacity < productions.Metal*32 {
 				targetPlanet = elm
