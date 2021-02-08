@@ -25,7 +25,7 @@ func (bot *OGameBot) SendRessRoutineFromCelestitial(fromCelestitial ogame.Celest
 	}
 
 	currentShips, _ := bot.Ogamebot.GetShips(fromCelestitial.GetID())
-	LCCaps := ogame.LargeCargo.GetCargoCapacity(currentResearch, bot.Ogamebot.GetServer().Settings.EspionageProbeRaids != 0, bot.Class == ogame.Collector)
+	LCCaps := ogame.LargeCargo.GetCargoCapacity(currentResearch, bot.Ogamebot.GetServer().Settings.EspionageProbeRaids != 0, bot.Class == ogame.Collector, false)
 	//SCCaps := ogame.SmallCargo.GetCargoCapacity(currentResearch, bot.Ogamebot.GetServer().Settings.EspionageProbeRaids != 0 , bot.Class == ogame.Collector)
 	_ = OgameUtil.GetCapacityOfCurrentBot(bot.Ogamebot, ogame.SmallCargo.BaseShip)
 

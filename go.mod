@@ -9,7 +9,7 @@ require (
 	github.com/sirupsen/logrus v1.4.2
 	github.com/slayer/autorestart v0.0.0-20170706172704-7bc8d250279b // indirect
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0
-	gopkg.in/tucnak/telebot.v2 v2.0.0-20191225234705-baa616bc00d5
+	gopkg.in/tucnak/telebot.v2 v2.3.5
 	gopkg.in/urfave/cli.v2 v2.0.0-20180128182452-d3ae77c26ac8
 	gopkg.in/yaml.v2 v2.2.7 // indirect
 )
