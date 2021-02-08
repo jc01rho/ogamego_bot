@@ -19,7 +19,7 @@ stages:
 
 
 before_script:
-  - git clone https://jc01rho:!!aa132537@bitbucket.org/jc01rho/ogame.git ../ogame
+  - git clone https://github.com/0xE232FE/ogame.mod.git ../ogame
 #  - mkdir -p $GOPATH/src/$REPO/$GROUP $GOPATH/src/_/builds
 #  - cp -r $CUSTOM_PROJECT_DIR $GOPATH/src/$REPO/$GROUP/$PROJECT
 #  - ln -s $GOPATH/src/$REPO/$GROUP $GOPATH/src/_/builds/$GROUP
