@@ -4,36 +4,36 @@ import "bitbucket.org/jc01rho/ogame"
 
 func (bot *OGameBot) DoResearchForColonyShip() (bool, ogame.ID, int64) {
 
-	researches := bot.Ogamebot.GetCachedResearch()
-	researchesFinishat := bot.Ogamebot.GetResearchFinishAt()
+	//researches := bot.Ogamebot.GetCachedResearch()
 
-	if researchesFinishat > 0 {
-		return false, -1, 0
-	}
-
-	print("test")
-	_ = researches
-	_ = researchesFinishat
-
-	if researches.EnergyTechnology < 1 {
-		return true, ogame.EnergyTechnologyID, researches.EnergyTechnology
-
-	} else if researches.CombustionDrive < 2 {
-		return true, ogame.CombustionDriveID, researches.CombustionDrive
-
-	} else if researches.EspionageTechnology < 4 {
-		return true, ogame.EspionageTechnologyID, researches.EspionageTechnology
-
-	} else if researches.CombustionDrive < 3 {
-		return true, ogame.CombustionDriveID, researches.CombustionDrive
-
-	} else if researches.ImpulseDrive < 3 {
-		return true, ogame.ImpulseDriveID, researches.ImpulseDrive
-
-	} else if researches.Astrophysics < 1 {
-		return true, ogame.AstrophysicsID, researches.Astrophysics
-
-	}
+	//
+	//if researchesFinishat > 0 {
+	//	return false, -1, 0
+	//}
+	//
+	//print("test")
+	//_ = researches
+	//_ = researchesFinishat
+	//
+	//if researches.EnergyTechnology < 1 {
+	//	return true, ogame.EnergyTechnologyID, researches.EnergyTechnology
+	//
+	//} else if researches.CombustionDrive < 2 {
+	//	return true, ogame.CombustionDriveID, researches.CombustionDrive
+	//
+	//} else if researches.EspionageTechnology < 4 {
+	//	return true, ogame.EspionageTechnologyID, researches.EspionageTechnology
+	//
+	//} else if researches.CombustionDrive < 3 {
+	//	return true, ogame.CombustionDriveID, researches.CombustionDrive
+	//
+	//} else if researches.ImpulseDrive < 3 {
+	//	return true, ogame.ImpulseDriveID, researches.ImpulseDrive
+	//
+	//} else if researches.Astrophysics < 1 {
+	//	return true, ogame.AstrophysicsID, researches.Astrophysics
+	//
+	//}
 
 	//if facilities['research_lab'] < 3:
 	//self.logger.info("build ResearchLab start")

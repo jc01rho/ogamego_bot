@@ -16,7 +16,7 @@ if pgrep -x "ogamebot" > /dev/null
 then
     echo "test"
 else
-    cd ~/git/ogamego_bot
+    cd ~/ogamego_bot
     git pull
     ./updateApp.sh latest ogamebotNew;
     mv ogamebotNew ogamebot;
