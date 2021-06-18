@@ -1,7 +1,7 @@
 package Global
 
 import (
-	"bitbucket.org/jc01rho/ogame"
+	"github.com/0xE232FE/ogame.mod"
 	"github.com/emirpasic/gods/sets/hashset"
 	"github.com/jc01rho/ogamego_bot/OGameBotRoutine"
 	"github.com/jc01rho/ogamego_bot/Queue"

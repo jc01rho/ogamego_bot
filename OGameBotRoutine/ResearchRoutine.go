@@ -1,6 +1,6 @@
 package OGameBotRoutine
 
-import "bitbucket.org/jc01rho/ogame"
+import "github.com/0xE232FE/ogame.mod"
 
 func (bot *OGameBot) DoResearchForColonyShip() (bool, ogame.ID, int64) {
 

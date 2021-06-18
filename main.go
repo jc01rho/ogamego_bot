@@ -1,8 +1,8 @@
 package main
 
 import (
-	"bitbucket.org/jc01rho/ogame"
 	"crypto/subtle"
+	"github.com/0xE232FE/ogame.mod"
 	"github.com/SeitArt/autorestart"
 	"github.com/jc01rho/ogamego_bot/Global"
 	"github.com/jc01rho/ogamego_bot/Logger"

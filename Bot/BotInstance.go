@@ -1,7 +1,7 @@
 package Bot
 
 import (
-	"bitbucket.org/jc01rho/ogame"
+	"github.com/0xE232FE/ogame.mod"
 	"github.com/jc01rho/ogamego_bot/OGameBotRoutine"
 	"os"
 )

@@ -1,6 +1,6 @@
 package OgameUtil
 
-import "bitbucket.org/jc01rho/ogame"
+import "github.com/0xE232FE/ogame.mod"
 
 func BuildTargetID(bot *ogame.OGame, targetPlanet ogame.CelestialID, targetBuilding ogame.BaseOgameObj, nbr int64) {
 	//bot.SendFleet()

@@ -1,7 +1,7 @@
 package Test
 
 import (
-	"bitbucket.org/jc01rho/ogame"
+	"github.com/0xE232FE/ogame.mod"
 	"reflect"
 	"testing"
 )

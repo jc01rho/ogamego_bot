@@ -1,7 +1,7 @@
 package OGameBotRoutine
 
 import (
-	"bitbucket.org/jc01rho/ogame"
+	"github.com/0xE232FE/ogame.mod"
 	log "github.com/sirupsen/logrus"
 )
 

@@ -1,6 +1,6 @@
 package OGameBotRoutine
 
-import "bitbucket.org/jc01rho/ogame"
+import "github.com/0xE232FE/ogame.mod"
 
 func (bot *OGameBot) GetNextFacilityInBuildRess(planet ogame.Planet) (bool, ogame.Planet, ogame.ID, int64) {
 

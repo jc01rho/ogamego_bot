@@ -1,6 +1,6 @@
 package OgameUtil
 
-import "bitbucket.org/jc01rho/ogame"
+import "github.com/0xE232FE/ogame.mod"
 
 func ResourcePricesSum(res ogame.Resources) int64 {
 

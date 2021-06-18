@@ -1,7 +1,7 @@
 module github.com/jc01rho/ogamego_bot
 
 require (
-	bitbucket.org/jc01rho/ogame v0.0.0
+	github.com/0xE232FE/ogame.mod v0.0.0
 	github.com/SeitArt/autorestart v0.0.0-20200118174117-09bb20ae362c
 	github.com/emirpasic/gods v1.12.0
 	github.com/jc01rho/gocron v0.0.0-20200317110215-1a3ca30ce0f3
@@ -14,6 +14,6 @@ require (
 	gopkg.in/yaml.v2 v2.2.7 // indirect
 )
 
-replace bitbucket.org/jc01rho/ogame => ../ogame
+replace github.com/0xE232FE/ogame.mod => ../ogame
 
 go 1.14
